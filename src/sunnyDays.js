@@ -22,24 +22,24 @@ class SunnyDays {
     const height = 300
     
     // figure out how to get width correct
-    const svg = d3.select('svg').attr("height", 1000).attr("width", 1000)
+    const svg = d3.select('svg').attr("height", 500).attr("width", 500)
 
     const chart = svg.append('g')
       .attr("transform", `translate(${margin}, ${margin})`)
 
     // y axis
     const yScale = d3.scaleLinear()
+      .domain([365, 0])
       .range([height, 0])
-      .domain([0, 365])
 
     chart.append('g')
       .call(d3.axisLeft(yScale))
 
     // x axis
     const xScale = d3.scaleBand()
-      .range([0, width]) // width between each item
       .domain(this.data.map(d => d.city))
-      .padding(0.2)
+      .range([0, width])
+      .padding(0.1)
 
     // city labels
     chart.append('g')
@@ -47,11 +47,10 @@ class SunnyDays {
       .call(d3.axisBottom(xScale))
       // rotate text
       .selectAll("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", -5)
-      .attr("x", -12)
-      // .attr("dy", "10px")
-      .style("text-anchor", "end");
+      .attr("transform", "rotate(90)")
+      .attr("y", -3)
+      .attr("x", 10)
+      .style("text-anchor", "start");
 
     // fill rects
     chart.selectAll()
