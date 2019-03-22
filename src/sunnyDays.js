@@ -29,7 +29,7 @@ class SunnyDays {
 
     // y axis
     const yScale = d3.scaleLinear()
-      .domain([365, 0])
+      .domain([150, 300])
       .range([height, 0])
 
     chart.append('g')
@@ -78,7 +78,6 @@ class SunnyDays {
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle")
       .text("Days")
-      .style("font-size", "12px")
       
       svg.append("text")
       .attr("x", width / 2)
