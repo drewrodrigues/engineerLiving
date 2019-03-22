@@ -17,3 +17,14 @@ svg {
   width: 25%;
   margin-top: 400px;
 }
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.topCharts {
+}
+
+.bottomCharts {
+}
