@@ -1,17 +1,29 @@
+import { CITIES } from './constants'
+import {
+  SAN_FRANCISCO,
+  NEW_YORK,
+  BOSTON,
+  SEATTLE,
+  HOUSTON,
+  SAN_JOSE,
+  RALEIGN,
+  DENVER,
+  PHOENIX
+} from './constants'
+
 class SunnyDays {
   constructor() {
-    this.data = [
-      { city: "San Francisco", days: 256, color: "#f1c40f" },
-      { city: "New York", days: 224, color: "#2980b9" },
-      { city: "Boston", days: 200, color: "#e74c3c" },
-      { city: "Miami", days: 248, color: "#e67e22" },
-      { city: "Seattle", days: 152, color: "#1abc9c" },
-      { city: "Houston", days: 204, color: "#34495e" },
-      { city: "San Jose", days: 257, color: "#9b59b6" },
-      { city: "Raleigh", days: 213, color: "#f39c12" },
-      { city: "Denver", days: 245, color: "#2980b9" },
-      { city: "Phoenix", days: 299, color: "#c0392b" },
-    ]
+    this.data = CITIES
+
+    this.data[SAN_FRANCISCO].days = 256
+    this.data[NEW_YORK].days = 224
+    this.data[BOSTON].days = 200
+    this.data[SEATTLE].days = 152
+    this.data[HOUSTON].days = 204
+    this.data[SAN_JOSE].days = 204
+    this.data[RALEIGN].days = 213
+    this.data[DENVER].days = 245
+    this.data[PHOENIX].days = 299
 
     this.render()
   }
@@ -38,7 +50,7 @@ class SunnyDays {
 
     // y axis - city
     const yScale = d3.scaleBand()
-      .domain(this.data.map(d => d.city))
+      .domain(Object.values(this.data).map(d => d.city))
       .range([0, width])
       .padding(0.1)
 
@@ -48,7 +60,7 @@ class SunnyDays {
 
     // fill rects
     chart.selectAll()
-      .data(this.data)
+      .data(Object.values(this.data))
       .enter()
       .append('rect')
       .attr('x', 1)
