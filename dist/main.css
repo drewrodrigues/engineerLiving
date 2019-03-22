@@ -11,3 +11,9 @@ body {
   fill: none;
   stroke-width: 1px;
 }
+
+svg {
+  float: left;
+  width: 25%;
+  margin-top: 100px;
+}

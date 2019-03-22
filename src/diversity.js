@@ -68,10 +68,11 @@ class Diversity {
   }
 
   render() {
-    const width = 300
-    const height = 300
+    const width = 200
+    const height = 200
+    const margins = 100
 
-    const svg = d3.select('svg.diversity').attr("height", 500).attr("width", 500)
+    const svg = d3.select('svg.diversity').attr("height", height + margins * 2).attr("width", width + margins * 2)
     const chart = svg.append('g').attr('transform', "translate(100, 100)")
 
     // x axis
@@ -182,7 +183,7 @@ class Diversity {
     // top label
     chart.append('text')
       .attr('x', width / 2)
-      .attr('y', -50)
+      .attr('y', -20)
       .attr('text-anchor', 'middle')
       .text('Diversity')
   }

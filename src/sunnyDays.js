@@ -17,15 +17,15 @@ class SunnyDays {
   }
 
   render() {
-    const margin = 50
-    const width = 300
-    const height = 300
+    const width = 200
+    const height = 200
+    const margins = 100
     
     // figure out how to get width correct
-    const svg = d3.select('svg').attr("height", 500).attr("width", 500)
+    const svg = d3.select('svg').attr("height", height + margins * 2).attr("width", width + margins * 2)
 
     const chart = svg.append('g')
-      .attr("transform", `translate(${margin}, ${margin})`)
+      .attr("transform", `translate(${margins}, ${margins})`)
 
     // y axis
     const yScale = d3.scaleLinear()
@@ -72,17 +72,18 @@ class SunnyDays {
             .tickFormat(''))
     
     // label left
-    svg.append("text")
-      .attr("x", -(height/2) - margin)
-      .attr("y", 10)
+    chart.append("text")
+      .attr("x", -width/2)
+      .attr("y", -50)
       .attr("transform", "rotate(-90)")
       .attr("text-anchor", "middle")
       .text("Days")
       
-      svg.append("text")
+    // label top
+    chart.append("text")
       .attr("x", width / 2)
-      .attr("y", 25)
-      .attr("text-achor", "middle")
+      .attr("y", -20)
+      .attr('text-anchor', 'middle')
       .style("font-size", "12px")
       .text("Sunny days per year")
   }

@@ -20,8 +20,8 @@ class CrimeRates {
   }
 
   render() {
-    const width = 300
-    const height = 300
+    const width = 200
+    const height = 200
     const margin = 100
 
     const svg = d3.select('svg.crimeRates').attr('height', height + margin * 2).attr('width', width + margin * 2 + 100)
@@ -77,7 +77,7 @@ class CrimeRates {
     // top label
     chart.append("text")
       .attr("x", width / 2)
-      .attr("y", -50)
+      .attr("y", -20)
       .attr("text-anchor", "middle")
       .text("Crime Rates")
 
