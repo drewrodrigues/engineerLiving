@@ -4,4 +4,10 @@
 
 body {
   font-family: sans-serif;
+  font-size: 12px;
+}
+
+.line {
+  fill: none;
+  stroke-width: 1px;
 }
