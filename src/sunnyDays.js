@@ -8,7 +8,10 @@ import {
   SAN_JOSE,
   RALEIGN,
   DENVER,
-  PHOENIX
+  PHOENIX,
+  ANIMATION_DELAY,
+  ANIMATION_EASING,
+  ANIMATION_DURATION
 } from './constants'
 
 class SunnyDays {
@@ -66,8 +69,13 @@ class SunnyDays {
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth())
-      .attr('width', d => xScale(d.days))
       .style('fill', d => d.color)
+      // animation
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('width', d => xScale(d.days))
 
     // grid lines
     chart.append('g')

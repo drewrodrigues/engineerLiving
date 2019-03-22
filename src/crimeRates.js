@@ -1,3 +1,9 @@
+import {
+  ANIMATION_DELAY,
+  ANIMATION_EASING,
+  ANIMATION_DURATION
+} from "./constants";
+
 class CrimeRates {
   constructor() {
     this.averageViolentCrime = 22.7
@@ -53,20 +59,28 @@ class CrimeRates {
       .append('rect')
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
-      .attr('width', d => xScale(d.violentCrime))
       .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
-      .exit()
-      // propertyCrime
+      .transition()
+        .delay((d, i) => i * 500)
+        .duration(1000)
+      .attr('width', d => xScale(d.violentCrime))
+      
+    // propertyCrime
+    chart.selectAll()
       .data(this.data)
       .enter()
       .append('rect')
       .attr('x', 1)
       .attr('y', d => yScale(d.city) + yScale.bandwidth() / 2)
-      .attr('width', d => xScale(d.propertyCrime))
       .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
       .style('opacity', 0.6)
+      .transition()
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+        .ease(ANIMATION_EASING)
+      .attr('width', d => xScale(d.propertyCrime))
     
     // top label
     chart.append("text")

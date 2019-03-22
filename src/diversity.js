@@ -1,3 +1,9 @@
+import {
+  ANIMATION_DURATION,
+  ANIMATION_DELAY,
+  ANIMATION_EASING
+} from './constants'
+
 class Diversity {
   constructor() {
     this.ethnicities = ["White", "Asian", "Hispanic", "Black"],
@@ -109,7 +115,6 @@ class Diversity {
       .append('path')
       .attr('transform', 'translate(122, 100)') // FIXME: why do I have to do this
       .attr('class', d => `line ${d.city} diversity-${d.city}`)
-      .style('opacity', 0.5)
       .attr('d', d => line(d.values))
       .style('stroke', d => d.color)
       .on('mouseover', function(d) {
@@ -147,10 +152,10 @@ class Diversity {
       .attr('class', 'circle')
       .append('circle')
       .attr('transform', 'translate(122, 100)') // FIXME: why do I have to do this
+      .attr('r', 5)
       .attr('cx', d => xScale(d.ethnicity))
       .attr('cy', d => yScale(d.percentage))
-      .attr('r', 5)
-      .style('opacity', 0.5)
+      .style('opacity', 0)
       .on("mouseover", function(d) {
         svg.append("text")
           .text(d.percentage)
@@ -164,6 +169,11 @@ class Diversity {
         svg.select(".percentage-text").remove();
         d3.select(this).style("opacity", 0.5)
       })
+      .transition()
+        .duration(ANIMATION_DURATION)
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => ANIMATION_DELAY * i)
+        .style('opacity', 0.75)
     
     // bottom label
     chart.append('text')

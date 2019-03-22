@@ -1,3 +1,9 @@
+import {
+  ANIMATION_DELAY,
+  ANIMATION_EASING,
+  ANIMATION_DURATION
+} from "./constants";
+
 class MedianHomeCost {
   constructor() {
     this.data = [
@@ -64,8 +70,12 @@ class MedianHomeCost {
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth())
-      .attr('width', d => xScale(d.cost) / 100000)
       .style('fill', d => d.color)
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('width', d => xScale(d.cost) / 100000)
 
     chart.append('g')
       .attr('class', 'grid')

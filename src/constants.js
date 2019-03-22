@@ -60,3 +60,7 @@ export const CITIES = {
   DENVER: { city: DENVER_CITY, color: DENVER_COLOR, class: DENVER_CLASS },
   PHOENIX: { city: PHOENIX_CITY, color: PHOENIX_COLOR, class: PHOENIX_CLASS }
 }
+
+export const ANIMATION_DURATION = 1000
+export const ANIMATION_DELAY = 500
+export const ANIMATION_EASING = d3.easePoly

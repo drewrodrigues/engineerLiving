@@ -69,12 +69,23 @@ text {
 
 .line {
   fill: none;
-  stroke-width: 1px;
 }
 
 svg {
   float: left;
   width: 25%;
+}
+
+@media all and (max-width: 1200px) {
+  svg {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 600px) {
+  svg {
+    width: 100%;
+  }
 }
 
 .container {
@@ -96,6 +107,6 @@ svg {
 }
 
 .bottomCharts {
-  background: #212121;
+  background: #202020;
   color: white;
 }
