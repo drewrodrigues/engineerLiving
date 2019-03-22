@@ -26,27 +26,21 @@ class CrimeRates {
 
     const svg = d3.select('svg.crimeRates').attr('height', height + margin * 2).attr('width', width + margin * 2 + 100)
     const chart = svg.append('g').attr('transform', `translate(${margin}, ${margin})`)
-
+    
     // x axis - city
-    const xScale = d3.scaleBand()
-      .domain(this.data.map(d => d.city))
+    const xScale = d3.scaleLinear()
+      .domain([20, 80])
       .range([0, width])
-      .padding(0.1)
     
     chart.append('g')
       .call(d3.axisBottom(xScale))
       .attr("transform", `translate(0, ${height})`)
-      // rotate text
-      .selectAll('text')
-      .attr('transform', 'rotate(90)')
-      .style("text-anchor", "start")
-      .attr("y", -3)
-      .attr("x", 10)
-    
-    // y axis - crime per capita
-    const yScale = d3.scaleLinear()
-      .domain([20, 80])
-      .range([height, 0])
+
+    // y axis - crime
+    const yScale = d3.scaleBand()
+      .domain(this.data.map(d => d.city))
+      .range([0, height])
+      .padding(0.1)
     
     chart.append('g')
       .call(d3.axisLeft(yScale))
@@ -57,20 +51,20 @@ class CrimeRates {
       .data(this.data)
       .enter()
       .append('rect')
-      .attr('x', d => xScale(d.city))
-      .attr('y', d => yScale(d.violentCrime))
-      .attr('height', d => height - yScale(d.violentCrime))
-      .attr('width', xScale.bandwidth() / 2)
+      .attr('x', 1)
+      .attr('y', d => yScale(d.city))
+      .attr('width', d => height - xScale(d.violentCrime))
+      .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
       .exit()
       // propertyCrime
       .data(this.data)
       .enter()
       .append('rect')
-      .attr('x', d => xScale(d.city) + xScale.bandwidth() / 2)
-      .attr('y', d => yScale(d.propertyCrime))
-      .attr('height', d => height - yScale(d.propertyCrime))
-      .attr('width', xScale.bandwidth() / 2)
+      .attr('x', 1)
+      .attr('y', d => yScale(d.city) + yScale.bandwidth() / 2)
+      .attr('width', d => height - xScale(d.propertyCrime))
+      .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
       .style('opacity', 0.6)
     
@@ -84,53 +78,57 @@ class CrimeRates {
     // left label
     chart.append("text")
       .attr("x", -height/2)
-      .attr("y", -50)
+      .attr("y", -80)
       .attr("text-anchor", "middle")
-      .text("1 (low crime) to 100 (high crime)")
+      .text("Violent / Property Crime")
       .attr("transform", "rotate(-90)")
       
     // bottom label
     chart.append("text")
       .attr('x', width/2)
-      .attr('y', height + 90)
-      .text("Violent / Property Crime")
+      .attr('y', height + 50)
+      .text("Low to high crime")
       .attr("text-anchor", "middle")
     
     // grid line
     chart.append('g')
       .attr('class', 'grid')
-      .call(d3.axisLeft()
-      .scale(yScale)
+      .call(d3.axisTop()
+      .scale(xScale)
       .tickSize(-width, 0, 0)
       .tickFormat(''))
     
     // grid line - average violent crime
     chart.append('line')
-      .attr('x1', 0)
-      .attr('y1', height - 8)
-      .attr('x2', width)
-      .attr('y2', height - 8)
+      .attr('x1', 8)
+      .attr('y1', 0)
+      .attr('x2', 8)
+      .attr('y2', width)
       .attr('stroke', 'red')
       .style('opacity', 0.75)
     
     chart.append('text')
       .text("Average Violent Crime")
-      .attr('y', height - 8)
-      .attr('x', width + 5)
+      .attr('y', 0)
+      .attr('x', 0)
+      .style("font-size", "10px")
+      .attr('transform', "translate(8, 0), rotate(90)")
     
-    // grid line - average property cimr
+    // grid line - average property crime
     chart.append('line')
-      .attr('x1', 0)
-      .attr('y1', height - 77)
-      .attr('x2', width)
-      .attr('y2', height - 77)
+      .attr('x1', 52)
+      .attr('y1', 0)
+      .attr('x2', 52)
+      .attr('y2', width)
       .attr('stroke', 'red')
       .style('opacity', 0.75)
     
     chart.append('text')
       .text("Average Property Crime")
-      .attr('y', height - 77)
-      .attr('x', width + 5)
+      .attr('y', 0)
+      .attr('x', 0)
+      .style("font-size", "10px")
+      .attr('transform', 'translate(52, 0), rotate(90)')
   }
 }
 

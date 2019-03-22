@@ -107,7 +107,7 @@ class Diversity {
       .enter()
       .append('g')
       .append('path')
-      .attr('transform', 'translate(133, 100)') // FIXME: why do I have to do this
+      .attr('transform', 'translate(122, 100)') // FIXME: why do I have to do this
       .attr('class', d => `line ${d.city} diversity-${d.city}`)
       .style('opacity', 0.5)
       .attr('d', d => line(d.values))
@@ -146,7 +146,7 @@ class Diversity {
       .append('g')
       .attr('class', 'circle')
       .append('circle')
-      .attr('transform', 'translate(133, 100)') // FIXME: why do I have to do this
+      .attr('transform', 'translate(122, 100)') // FIXME: why do I have to do this
       .attr('cx', d => xScale(d.ethnicity))
       .attr('cy', d => yScale(d.percentage))
       .attr('r', 5)

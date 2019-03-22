@@ -27,7 +27,7 @@ class MedianHomeCost {
     // x axis
     const xScale = d3.scaleLinear()
       .domain([0, 14])
-      .range([0, width]) // width in px
+      .range([0, width])
 
     chart.append('g')
       .call(d3.axisBottom(xScale))
@@ -39,13 +39,15 @@ class MedianHomeCost {
       .range([0, height])
       .padding(0.1)
     
+    chart.append('g')
+      .call(d3.axisLeft(yScale))
+    
     // bottom label
     chart.append('text')
       .attr('x', width / 2)
       .attr('y', height + 50)
       .attr('text-anchor', 'middle')
       .text("in $100,000")
-      .style('font-size', "12px")
 
     // top label
     chart.append('text')
@@ -53,9 +55,6 @@ class MedianHomeCost {
       .attr('y', -20)
       .attr('text-anchor', 'middle')
       .text("Median Home Price")
-    
-    chart.append('g')
-      .call(d3.axisLeft(yScale))
 
     // fill rects
     chart.selectAll()

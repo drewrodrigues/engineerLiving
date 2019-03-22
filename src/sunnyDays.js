@@ -27,55 +27,48 @@ class SunnyDays {
     const chart = svg.append('g')
       .attr("transform", `translate(${margins}, ${margins})`)
 
-    // y axis
-    const yScale = d3.scaleLinear()
+    // x axis - sunny days
+    const xScale = d3.scaleLinear()
       .domain([150, 300])
-      .range([height, 0])
-
+      .range([0, width])
+      
     chart.append('g')
-      .call(d3.axisLeft(yScale))
+      .call(d3.axisBottom(xScale))
+      .attr("transform", `translate(0, ${height})`)
 
-    // x axis
-    const xScale = d3.scaleBand()
+    // y axis - city
+    const yScale = d3.scaleBand()
       .domain(this.data.map(d => d.city))
       .range([0, width])
       .padding(0.1)
 
     // city labels
     chart.append('g')
-      .attr('transform', `translate(0, ${height})`) // place at bottom
-      .call(d3.axisBottom(xScale))
-      // rotate text
-      .selectAll("text")
-      .attr("transform", "rotate(90)")
-      .attr("y", -3)
-      .attr("x", 10)
-      .style("text-anchor", "start");
+      .call(d3.axisLeft(yScale))
 
     // fill rects
     chart.selectAll()
       .data(this.data)
       .enter()
       .append('rect')
-      .attr('x', d => xScale(d.city))
-      .attr('y', d => yScale(d.days))
-      .attr('height', d => height - yScale(d.days))
-      .attr('width', xScale.bandwidth())
+      .attr('x', 1)
+      .attr('y', d => yScale(d.city))
+      .attr('height', yScale.bandwidth())
+      .attr('width', d => xScale(d.days))
       .style('fill', d => d.color)
 
     // grid lines
     chart.append('g')
       .attr('class', 'grid')
-      .call(d3.axisLeft()
-            .scale(yScale)
+      .call(d3.axisTop()
+            .scale(xScale)
             .tickSize(-width, 0, 0)
             .tickFormat(''))
     
-    // label left
+    // label bottom
     chart.append("text")
-      .attr("x", -width/2)
-      .attr("y", -50)
-      .attr("transform", "rotate(-90)")
+      .attr("x", width/2)
+      .attr("y", height + 50)
       .attr("text-anchor", "middle")
       .text("Days")
       
@@ -84,7 +77,6 @@ class SunnyDays {
       .attr("x", width / 2)
       .attr("y", -20)
       .attr('text-anchor', 'middle')
-      .style("font-size", "12px")
       .text("Sunny days per year")
   }
 }
