@@ -22,7 +22,7 @@ class SunnyDays {
     const margins = 100
     
     // figure out how to get width correct
-    const svg = d3.select('svg').attr("height", height + margins * 2).attr("width", width + margins * 2)
+    const svg = d3.select('svg.sunnyDays').attr("height", height + margins * 2).attr("width", width + margins * 2)
 
     const chart = svg.append('g')
       .attr("transform", `translate(${margins}, ${margins})`)
