@@ -2,6 +2,7 @@ import { CITIES } from './constants'
 import {
   SAN_FRANCISCO,
   NEW_YORK,
+  MIAMI,
   BOSTON,
   SEATTLE,
   HOUSTON,
@@ -23,6 +24,7 @@ class SunnyDays {
 
     this.data[SAN_FRANCISCO].days = 256
     this.data[NEW_YORK].days = 224
+    this.data[MIAMI].days = 248
     this.data[BOSTON].days = 200
     this.data[SEATTLE].days = 152
     this.data[HOUSTON].days = 204
@@ -85,6 +87,7 @@ class SunnyDays {
     
     // label bottom
     chart.append("text")
+      .attr('class', 'label-text')
       .attr("x", WIDTH/2)
       .attr("y", HEIGHT + 50)
       .attr("text-anchor", "middle")
@@ -92,6 +95,7 @@ class SunnyDays {
       
     // label top
     chart.append("text")
+      .attr('class', 'label-text')
       .attr("x", WIDTH / 2)
       .attr("y", -20)
       .attr('text-anchor', 'middle')

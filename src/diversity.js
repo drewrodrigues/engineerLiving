@@ -178,6 +178,7 @@ class Diversity {
     
     // bottom label
     chart.append('text')
+      .attr('class', 'label-text')
       .attr('x', WIDTH / 2)
       .attr('y', HEIGHT + 50)
       .attr('text-anchor', 'middle')
@@ -185,6 +186,7 @@ class Diversity {
 
     // left label
     chart.append('text')
+      .attr('class', 'label-text')
       .attr('x', -WIDTH/2)
       .attr('y', -50)
       .attr("transform", "rotate(-90)")
@@ -193,6 +195,7 @@ class Diversity {
 
     // top label
     chart.append('text')
+      .attr('class', 'label-text')
       .attr('x', WIDTH / 2)
       .attr('y', -20)
       .attr('text-anchor', 'middle')

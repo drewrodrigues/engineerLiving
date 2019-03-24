@@ -85,6 +85,7 @@ class CrimeRates {
     
     // top label
     chart.append("text")
+      .attr('class', 'label-text')
       .attr("x", WIDTH / 2)
       .attr("y", -20)
       .attr("text-anchor", "middle")
@@ -92,6 +93,7 @@ class CrimeRates {
 
     // left label
     chart.append("text")
+      .attr('class', 'label-text')
       .attr("x", -HEIGHT/2)
       .attr("y", -80)
       .attr("text-anchor", "middle")
@@ -100,6 +102,7 @@ class CrimeRates {
       
     // bottom label
     chart.append("text")
+      .attr('class', 'label-text')
       .attr('x', WIDTH/2)
       .attr('y', HEIGHT + 50)
       .text("Low to high crime")
@@ -123,6 +126,7 @@ class CrimeRates {
       .style('opacity', 0.75)
     
     chart.append('text')
+      .attr('class', 'label-text')
       .text("Average Violent Crime")
       .attr('y', 0)
       .attr('x', 0)
@@ -139,6 +143,7 @@ class CrimeRates {
       .style('opacity', 0.75)
     
     chart.append('text')
+      .attr('class', 'label-text')
       .text("Average Property Crime")
       .attr('y', 0)
       .attr('x', 0)
