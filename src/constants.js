@@ -64,3 +64,7 @@ export const CITIES = {
 export const ANIMATION_DURATION = 1000
 export const ANIMATION_DELAY = 500
 export const ANIMATION_EASING = d3.easePoly
+
+export const WIDTH = 200
+export const HEIGHT = 200
+export const MARGINS = 100

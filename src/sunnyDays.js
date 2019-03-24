@@ -11,7 +11,10 @@ import {
   PHOENIX,
   ANIMATION_DELAY,
   ANIMATION_EASING,
-  ANIMATION_DURATION
+  ANIMATION_DURATION,
+  WIDTH,
+  HEIGHT,
+  MARGINS
 } from './constants'
 
 class SunnyDays {
@@ -32,29 +35,24 @@ class SunnyDays {
   }
 
   render() {
-    const width = 200
-    const height = 200
-    const margins = 100
-    
-    // figure out how to get width correct
-    const svg = d3.select('svg.sunnyDays').attr("height", height + margins * 2).attr("width", width + margins * 2)
-
+    const svg = d3.select('svg.sunnyDays')
+      .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", `translate(${margins}, ${margins})`)
+      .attr("transform", `translate(${MARGINS}, ${MARGINS})`)
 
     // x axis - sunny days
     const xScale = d3.scaleLinear()
       .domain([150, 300])
-      .range([0, width])
+      .range([0, WIDTH])
       
     chart.append('g')
       .call(d3.axisBottom(xScale))
-      .attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis - city
     const yScale = d3.scaleBand()
       .domain(Object.values(this.data).map(d => d.city))
-      .range([0, width])
+      .range([0, WIDTH])
       .padding(0.1)
 
     // city labels
@@ -82,19 +80,19 @@ class SunnyDays {
       .attr('class', 'grid')
       .call(d3.axisTop()
             .scale(xScale)
-            .tickSize(-width, 0, 0)
+            .tickSize(-WIDTH, 0, 0)
             .tickFormat(''))
     
     // label bottom
     chart.append("text")
-      .attr("x", width/2)
-      .attr("y", height + 50)
+      .attr("x", WIDTH/2)
+      .attr("y", HEIGHT + 50)
       .attr("text-anchor", "middle")
       .text("Days")
       
     // label top
     chart.append("text")
-      .attr("x", width / 2)
+      .attr("x", WIDTH / 2)
       .attr("y", -20)
       .attr('text-anchor', 'middle')
       .text("Sunny days per year")

@@ -1,7 +1,10 @@
 import {
   ANIMATION_DELAY,
   ANIMATION_EASING,
-  ANIMATION_DURATION
+  ANIMATION_DURATION,
+  WIDTH,
+  HEIGHT,
+  MARGINS
 } from "./constants";
 
 class CrimeRates {
@@ -26,26 +29,24 @@ class CrimeRates {
   }
 
   render() {
-    const width = 200
-    const height = 200
-    const margin = 100
-
-    const svg = d3.select('svg.crimeRates').attr('height', height + margin * 2).attr('width', width + margin * 2 + 100)
-    const chart = svg.append('g').attr('transform', `translate(${margin}, ${margin})`)
+    const svg = d3.select('svg.crimeRates')
+      .attr('height', HEIGHT + MARGINS * 2).attr('width', WIDTH + MARGINS * 2 + 100)
+    const chart = svg.append('g')
+      .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
     
     // x axis - city
     const xScale = d3.scaleLinear()
       .domain([20, 80])
-      .range([0, width])
+      .range([0, WIDTH])
     
     chart.append('g')
       .call(d3.axisBottom(xScale))
-      .attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis - crime
     const yScale = d3.scaleBand()
       .domain(this.data.map(d => d.city))
-      .range([0, height])
+      .range([0, HEIGHT])
       .padding(0.1)
     
     chart.append('g')
@@ -84,14 +85,14 @@ class CrimeRates {
     
     // top label
     chart.append("text")
-      .attr("x", width / 2)
+      .attr("x", WIDTH / 2)
       .attr("y", -20)
       .attr("text-anchor", "middle")
       .text("Crime Rates")
 
     // left label
     chart.append("text")
-      .attr("x", -height/2)
+      .attr("x", -HEIGHT/2)
       .attr("y", -80)
       .attr("text-anchor", "middle")
       .text("Violent / Property Crime")
@@ -99,8 +100,8 @@ class CrimeRates {
       
     // bottom label
     chart.append("text")
-      .attr('x', width/2)
-      .attr('y', height + 50)
+      .attr('x', WIDTH/2)
+      .attr('y', HEIGHT + 50)
       .text("Low to high crime")
       .attr("text-anchor", "middle")
     
@@ -109,7 +110,7 @@ class CrimeRates {
       .attr('class', 'grid')
       .call(d3.axisTop()
       .scale(xScale)
-      .tickSize(-width, 0, 0)
+      .tickSize(-WIDTH, 0, 0)
       .tickFormat(''))
     
     // grid line - average violent crime
@@ -117,7 +118,7 @@ class CrimeRates {
       .attr('x1', 8)
       .attr('y1', 0)
       .attr('x2', 8)
-      .attr('y2', width)
+      .attr('y2', WIDTH)
       .attr('stroke', 'red')
       .style('opacity', 0.75)
     
@@ -133,7 +134,7 @@ class CrimeRates {
       .attr('x1', 52)
       .attr('y1', 0)
       .attr('x2', 52)
-      .attr('y2', width)
+      .attr('y2', WIDTH)
       .attr('stroke', 'red')
       .style('opacity', 0.75)
     

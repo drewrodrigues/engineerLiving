@@ -1,7 +1,10 @@
 import {
   ANIMATION_DURATION,
   ANIMATION_DELAY,
-  ANIMATION_EASING
+  ANIMATION_EASING,
+  WIDTH,
+  HEIGHT,
+  MARGINS
 } from './constants'
 
 class Diversity {
@@ -74,27 +77,25 @@ class Diversity {
   }
 
   render() {
-    const width = 200
-    const height = 200
-    const margins = 100
-
-    const svg = d3.select('svg.diversity').attr("height", height + margins * 2).attr("width", width + margins * 2)
-    const chart = svg.append('g').attr('transform', "translate(100, 100)")
+    const svg = d3.select('svg.diversity')
+      .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
+    const chart = svg.append('g')
+      .attr('transform', "translate(100, 100)")
 
     // x axis
     const xScale = d3.scaleBand()
       .domain(this.ethnicities)
-      .range([0, width])
+      .range([0, WIDTH])
       .padding(0.1)
 
     chart.append('g')
       .call(d3.axisBottom(xScale))
-      .attr("transform", `translate(0, ${height})`)
+      .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis
     const yScale = d3.scaleLinear()
       .domain([70, 0])
-      .range([0, height])
+      .range([0, HEIGHT])
 
     chart.append('g')
       .call(d3.axisLeft(yScale))
@@ -177,14 +178,14 @@ class Diversity {
     
     // bottom label
     chart.append('text')
-      .attr('x', width / 2)
-      .attr('y', height + 50)
+      .attr('x', WIDTH / 2)
+      .attr('y', HEIGHT + 50)
       .attr('text-anchor', 'middle')
       .text('Ethnicity')
 
     // left label
     chart.append('text')
-      .attr('x', -width/2)
+      .attr('x', -WIDTH/2)
       .attr('y', -50)
       .attr("transform", "rotate(-90)")
       .attr('text-anchor', 'middle')
@@ -192,7 +193,7 @@ class Diversity {
 
     // top label
     chart.append('text')
-      .attr('x', width / 2)
+      .attr('x', WIDTH / 2)
       .attr('y', -20)
       .attr('text-anchor', 'middle')
       .text('Diversity')
