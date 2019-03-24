@@ -87,6 +87,7 @@ svg {
 .topCharts {
   background: #121212;
   height: 400px;
+  padding: 10px 0;
 }
 
 .topCharts:after,
