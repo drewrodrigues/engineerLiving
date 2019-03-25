@@ -1,29 +1,50 @@
 import {
+  CITIES,
+  SAN_FRANCISCO,
+  NEW_YORK,
+  MIAMI,
+  BOSTON,
+  SEATTLE,
+  HOUSTON,
+  SAN_JOSE,
+  RALEIGN,
+  DENVER,
+  PHOENIX,
   ANIMATION_DELAY,
   ANIMATION_EASING,
   ANIMATION_DURATION,
   WIDTH,
   HEIGHT,
   MARGINS
-} from "./constants";
+} from './constants'
 
 class CrimeRates {
   constructor() {
     this.averageViolentCrime = 22.7
     this.averagePropertyCrime = 35.4
+    this.data = CITIES
 
-    this.data = [
-      { city: "San Francisco", color: "#f1c40f", violentCrime: 39.6, propertyCrime: 79.2 },
-      { city: "New York", color: "#2980b9", violentCrime: 28.2, propertyCrime: 24.9 },
-      { city: "Boston", color: "#e74c3c", violentCrime: 37.3, propertyCrime: 35.8 },
-      { city: "Miami", color: "#e67e22", violentCrime: 48.8, propertyCrime: 62.7 },
-      { city: "Seattle", color: "#1abc9c", violentCrime: 32.3, propertyCrime: 76.9 },
-      { city: "Houston", color: "#34495e", violentCrime: 50.4, propertyCrime: 63.2 },
-      { city: "San Jose", color: "#9b59b6", violentCrime: 25, propertyCrime: 36.5 },
-      { city: "Raleigh", color: "#f39c12", violentCrime: 20.3, propertyCrime: 44.4 },
-      { city: "Denver", color: "#2980b9", violentCrime: 30.7, propertyCrime: 50.8 },
-      { city: "Phoenix", color: "#c0392b", violentCrime: 37.5, propertyCrime: 52.8}
-    ]
+    this.data[SAN_FRANCISCO].violentCrime = 39.6
+    this.data[NEW_YORK].violentCrime = 28.2
+    this.data[BOSTON].violentCrime = 37.3
+    this.data[MIAMI].violentCrime = 48.8
+    this.data[SEATTLE].violentCrime = 32.3
+    this.data[HOUSTON].violentCrime = 50.4
+    this.data[SAN_JOSE].violentCrime = 25, 
+    this.data[RALEIGN].violentCrime = 20.3
+    this.data[DENVER].violentCrime = 30.7
+    this.data[PHOENIX].violentCrime = 37.5
+
+    this.data[SAN_FRANCISCO].propertyCrime = 79.2
+    this.data[NEW_YORK].propertyCrime = 24.9
+    this.data[BOSTON].propertyCrime = 35.8
+    this.data[MIAMI].propertyCrime = 62.7
+    this.data[SEATTLE].propertyCrime = 76.9
+    this.data[HOUSTON].propertyCrime = 63.2
+    this.data[SAN_JOSE].propertyCrime = 36.5
+    this.data[RALEIGN].propertyCrime = 44.4
+    this.data[DENVER].propertyCrime = 50.8
+    this.data[PHOENIX].propertyCrime = 52.8
 
     this.render()
   }
@@ -45,7 +66,7 @@ class CrimeRates {
 
     // y axis - crime
     const yScale = d3.scaleBand()
-      .domain(this.data.map(d => d.city))
+      .domain(Object.values(this.data).map(d => d.city))
       .range([0, HEIGHT])
       .padding(0.1)
     
@@ -55,28 +76,31 @@ class CrimeRates {
     // fill rects
     chart.selectAll()
       // violentCrime
-      .data(this.data)
+      .data(Object.values(this.data))
       .enter()
       .append('rect')
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
+      .attr('class', d => `city ${d.class}`)
       .transition()
-        .delay((d, i) => i * 500)
-        .duration(1000)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+        .ease(ANIMATION_EASING)
       .attr('width', d => xScale(d.violentCrime))
       
     // propertyCrime
     chart.selectAll()
-      .data(this.data)
+      .data(Object.values(this.data))
       .enter()
       .append('rect')
       .attr('x', 1)
-      .attr('y', d => yScale(d.city) + yScale.bandwidth() / 2)
+      .attr('y', d => yScale(d.city) + yScale.bandwidth() / 2 + 1)
       .attr('height', yScale.bandwidth() / 2)
       .style('fill', d => d.color)
-      .style('opacity', 0.6)
+      // .style('opacity', 0.6)
+      .attr('class', d => `city ${d.class}`)
       .transition()
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)

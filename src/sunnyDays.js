@@ -1,5 +1,5 @@
-import { CITIES } from './constants'
 import {
+  CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
   MIAMI,
@@ -66,6 +66,7 @@ class SunnyDays {
       .data(Object.values(this.data))
       .enter()
       .append('rect')
+      .attr('class', d => `city ${d.class}`)
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth())

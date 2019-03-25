@@ -123,6 +123,32 @@ svg {
   width: 100%;
 }
 
+.map-city-label {
+  cursor: pointer;
+}
+
 .label-text {
   fill: white;
+}
+
+.city {
+  transition: opacity 0.5s;
+}
+
+.filter {
+  opacity: 0.1;
+}
+
+.emphasize {
+  opacity: 1;
+}
+
+@keyframes bounce {
+  from { transform: translate(0, 0) }
+  to { transform: translate(0, -3px) }
+}
+
+.city-pinpoint {
+  animation: bounce 0.5s infinite;
+  animation-direction: alternate;
 }

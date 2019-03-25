@@ -1,26 +1,37 @@
 import {
+  CITIES,
+  SAN_FRANCISCO,
+  NEW_YORK,
+  MIAMI,
+  BOSTON,
+  SEATTLE,
+  HOUSTON,
+  SAN_JOSE,
+  RALEIGN,
+  DENVER,
+  PHOENIX,
   ANIMATION_DELAY,
   ANIMATION_EASING,
   ANIMATION_DURATION,
   WIDTH,
   HEIGHT,
   MARGINS
-} from "./constants";
+} from './constants'
 
 class MedianHomeCost {
   constructor() {
-    this.data = [
-      { city: "San Francisco", cost: 1331100, color: "#f1c40f" },
-      { city: "New York", cost: 662100, color: "#2980b9" },
-      { city: "Boston", cost: 587000, color: "#e74c3c" },
-      { city: "Miami", cost: 326000, color: "#e67e22" },
-      { city: "Seattle", cost: 761800, color: "#1abc9c" },
-      { city: "Houston", cost: 175700, color: "#34495e" },
-      { city: "San Jose", cost: 1083000, color: "#9b59b6" },
-      { city: "Raleigh", cost: 260100, color: "#f39c12" },
-      { city: "Denver", cost: 421900, color: "#2980b9" },
-      { city: "Phoenix", cost: 229300, color: "#c0392b" }
-    ]
+    this.data = CITIES
+
+    this.data[SAN_FRANCISCO].cost = 1331100
+    this.data[NEW_YORK].cost = 662100
+    this.data[BOSTON].cost = 587000
+    this.data[MIAMI].cost = 326000
+    this.data[SEATTLE].cost = 761800
+    this.data[HOUSTON].cost = 175700
+    this.data[SAN_JOSE].cost = 1083000
+    this.data[RALEIGN].cost = 260100
+    this.data[DENVER].cost = 421900
+    this.data[PHOENIX].cost = 229300
 
     this.render()
   }
@@ -42,7 +53,7 @@ class MedianHomeCost {
 
     // y axis
     const yScale = d3.scaleBand()
-      .domain(this.data.map(d => d.city))
+      .domain(Object.values(this.data).map(d => d.city))
       .range([0, HEIGHT])
       .padding(0.1)
     
@@ -67,9 +78,10 @@ class MedianHomeCost {
 
     // fill rects
     chart.selectAll()
-      .data(this.data)
+      .data(Object.values(this.data))
       .enter()
       .append('rect')
+      .attr('class', d => `city ${d.class}`)
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth())
