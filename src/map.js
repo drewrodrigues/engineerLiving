@@ -23,11 +23,11 @@ class Map {
     this.data[SAN_FRANCISCO].ranking = 1
     this.data[NEW_YORK].position = { x: 650, y: 135 }
     this.data[NEW_YORK].ranking = 2
-    this.data[PORTLAND].position = { x: 600, y: 350 }
+    this.data[PORTLAND].position = { x: 45, y: 90 }
     this.data[PORTLAND].ranking = 3
     this.data[BOSTON].position = { x: 680, y: 100 }
     this.data[BOSTON].ranking = 4
-    this.data[SEATTLE].position = { x: 40, y: 40 }
+    this.data[SEATTLE].position = { x: 45, y: 40 }
     this.data[SEATTLE].ranking = 5
     this.data[AUSTIN].position = { x: 340, y: 350 }
     this.data[AUSTIN].ranking = 6
