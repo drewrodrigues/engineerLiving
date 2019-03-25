@@ -61,8 +61,8 @@ export const CITIES = {
   PHOENIX: { city: PHOENIX_CITY, color: PHOENIX_COLOR, class: PHOENIX_CLASS }
 }
 
-export const ANIMATION_DURATION = 1000
-export const ANIMATION_DELAY = 500
+export const ANIMATION_DURATION = 750
+export const ANIMATION_DELAY = 750
 export const ANIMATION_EASING = d3.easePoly
 
 export const WIDTH = 200
