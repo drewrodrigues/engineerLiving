@@ -96,10 +96,9 @@ class Diversity {
     const xScale = d3.scaleBand()
       .domain(this.ethnicities)
       .range([0, WIDTH])
-      .padding(0.1)
 
     chart.append('g')
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale).tickSizeOuter(0))
       .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis
@@ -115,16 +114,12 @@ class Diversity {
       .x(d => xScale(d.ethnicity))
       .y(d => yScale(d.percentage))
     
-    let lines = svg.append('g')
-      .attr('class', 'lines')
-    
     // add lines
-    lines.selectAll('.line-group')
+    chart.selectAll()
       .data(Object.values(this.data))
       .enter()
-      .append('g')
       .append('path')
-      .attr('transform', 'translate(122, 100)') // FIXME: why do I have to do this
+      .attr('transform', 'translate(25, 0)') // FIXME: why do I have to do this
       .attr('class', d => `line city ${d.class}`)
       .attr('d', d => line(d.values))
       .style('stroke', d => d.color)
@@ -160,9 +155,9 @@ class Diversity {
     // grid line
     chart.append('g')
       .attr('class', 'grid')
-      .call(d3.axisLeft()
+      .call(d3.axisRight()
       .scale(yScale)
-      .tickSize(-WIDTH, 0, 0)
+      .tickSize(WIDTH, 0, 0)
       .tickFormat(''))
   }
 }

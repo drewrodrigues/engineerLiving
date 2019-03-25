@@ -94,10 +94,10 @@ class MedianHomeCost {
 
     chart.append('g')
       .attr('class', 'grid')
-      .call(d3.axisTop()
-            .scale(xScale)
-            .tickSize(-WIDTH, 0, 0)
-            .tickFormat(''))
+      .call(d3.axisBottom()
+      .scale(xScale)
+      .tickSize(WIDTH, 0, 0)
+      .tickFormat(''))
   }
 }
 
