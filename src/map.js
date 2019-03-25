@@ -62,7 +62,6 @@ class Map {
       .style('fill', d => "rgba(0,0,0,0.3)")
       .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('cy', d => d.position.y + 5)
       .attr('cx', d => d.position.x)
@@ -89,14 +88,13 @@ class Map {
         })
       })
       .style('fill', 'none')
-      .attr('cy', d => d.position.y)
-      .attr('cx', d => d.position.x)
       .style('cursor', 'pointer')
       .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .style('fill', d => d.color)
+        .attr('cy', d => d.position.y)
+        .attr('cx', d => d.position.x)
       .attr('class', d => `city ${d.class} city-pinpoint`)
   }
 
@@ -110,7 +108,6 @@ class Map {
       .style('fill', d => "#fff")
       .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('cy', d => d.position.y)
       .attr('cx', d => d.position.x)
@@ -146,7 +143,6 @@ class Map {
       // animation
       .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION / 1.5)
       .attr('opacity', 1)
       .attr('x', d => {
@@ -173,7 +169,6 @@ class Map {
       .style('font-size', 16)
       .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('y', d => d.position.y + 6)
       .attr('x', d => d.position.x)
