@@ -2,10 +2,10 @@ import {
   CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
-  MIAMI,
+  PORTLAND,
   BOSTON,
   SEATTLE,
-  HOUSTON,
+  AUSTIN,
   SAN_JOSE,
   RALEIGN,
   DENVER,
@@ -27,9 +27,9 @@ class CrimeRates {
     this.data[SAN_FRANCISCO].violentCrime = 39.6
     this.data[NEW_YORK].violentCrime = 28.2
     this.data[BOSTON].violentCrime = 37.3
-    this.data[MIAMI].violentCrime = 48.8
+    this.data[PORTLAND].violentCrime = 21.7
     this.data[SEATTLE].violentCrime = 32.3
-    this.data[HOUSTON].violentCrime = 50.4
+    this.data[AUSTIN].violentCrime = 24.9
     this.data[SAN_JOSE].violentCrime = 25, 
     this.data[RALEIGN].violentCrime = 20.3
     this.data[DENVER].violentCrime = 30.7
@@ -38,9 +38,9 @@ class CrimeRates {
     this.data[SAN_FRANCISCO].propertyCrime = 79.2
     this.data[NEW_YORK].propertyCrime = 24.9
     this.data[BOSTON].propertyCrime = 35.8
-    this.data[MIAMI].propertyCrime = 62.7
+    this.data[PORTLAND].propertyCrime = 72.3
     this.data[SEATTLE].propertyCrime = 76.9
-    this.data[HOUSTON].propertyCrime = 63.2
+    this.data[AUSTIN].propertyCrime = 55.0
     this.data[SAN_JOSE].propertyCrime = 36.5
     this.data[RALEIGN].propertyCrime = 44.4
     this.data[DENVER].propertyCrime = 50.8

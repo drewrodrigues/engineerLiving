@@ -2,10 +2,10 @@ import {
   CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
-  MIAMI,
+  PORTLAND,
   BOSTON,
   SEATTLE,
-  HOUSTON,
+  AUSTIN,
   SAN_JOSE,
   RALEIGN,
   DENVER,
@@ -26,9 +26,9 @@ class JobMarket {
     this.data[SAN_FRANCISCO].jobs = 7947
     this.data[NEW_YORK].jobs = 8364
     this.data[BOSTON].jobs = 3630
-    this.data[MIAMI].jobs = 602
+    this.data[PORTLAND].jobs = 2359
     this.data[SEATTLE].jobs = 10417
-    this.data[HOUSTON].jobs = 2909
+    this.data[AUSTIN].jobs = 4308
     this.data[SAN_JOSE].jobs = 3023
     this.data[RALEIGN].jobs = 1377 // FIXME: RALEIGH
     this.data[DENVER].jobs = 1973

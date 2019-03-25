@@ -2,10 +2,10 @@ import {
   CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
-  MIAMI,
+  PORTLAND,
   BOSTON,
   SEATTLE,
-  HOUSTON,
+  AUSTIN,
   SAN_JOSE,
   RALEIGN,
   DENVER,
@@ -22,12 +22,14 @@ class MedianHomeCost {
   constructor() {
     this.data = CITIES
 
+    // https://www.bestplaces.net/
+
     this.data[SAN_FRANCISCO].cost = 1331100
     this.data[NEW_YORK].cost = 662100
     this.data[BOSTON].cost = 587000
-    this.data[MIAMI].cost = 326000
+    this.data[PORTLAND].cost = 427500
     this.data[SEATTLE].cost = 761800
-    this.data[HOUSTON].cost = 175700
+    this.data[AUSTIN].cost = 346500
     this.data[SAN_JOSE].cost = 1083000
     this.data[RALEIGN].cost = 260100
     this.data[DENVER].cost = 421900

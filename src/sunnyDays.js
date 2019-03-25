@@ -2,10 +2,10 @@ import {
   CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
-  MIAMI,
+  PORTLAND,
   BOSTON,
   SEATTLE,
-  HOUSTON,
+  AUSTIN,
   SAN_JOSE,
   RALEIGN,
   DENVER,
@@ -24,10 +24,10 @@ class SunnyDays {
 
     this.data[SAN_FRANCISCO].days = 256
     this.data[NEW_YORK].days = 224
-    this.data[MIAMI].days = 248
+    this.data[PORTLAND].days = 144
     this.data[BOSTON].days = 200
     this.data[SEATTLE].days = 152
-    this.data[HOUSTON].days = 204
+    this.data[AUSTIN].days = 228
     this.data[SAN_JOSE].days = 204
     this.data[RALEIGN].days = 213
     this.data[DENVER].days = 245
@@ -44,7 +44,7 @@ class SunnyDays {
 
     // x axis - sunny days
     const xScale = d3.scaleLinear()
-      .domain([150, 300])
+      .domain([140, 300])
       .range([0, WIDTH])
       
     chart.append('g')

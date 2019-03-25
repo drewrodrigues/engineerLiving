@@ -127,6 +127,7 @@ svg {
 
 .map-city-label {
   cursor: pointer;
+  font-weight: 700;
 }
 
 .label-text {

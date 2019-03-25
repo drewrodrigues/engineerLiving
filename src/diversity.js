@@ -2,10 +2,10 @@ import {
   CITIES,
   SAN_FRANCISCO,
   NEW_YORK,
-  MIAMI,
+  PORTLAND,
   BOSTON,
   SEATTLE,
-  HOUSTON,
+  AUSTIN,
   SAN_JOSE,
   RALEIGN,
   DENVER,
@@ -40,11 +40,11 @@ class Diversity {
       { ethnicity: "Hispanic", percentage: 18.4 },
       { ethnicity: "Black", percentage: 22.7 }
     ]
-    this.data[MIAMI].values = [
-      { ethnicity: "White", percentage: 11.1 },
-      { ethnicity: "Asian", percentage: 0.8 },
-      { ethnicity: "Hispanic", percentage: 70.7 },
-      { ethnicity: "Black", percentage: 16.7 }
+    this.data[PORTLAND].values = [
+      { ethnicity: "White", percentage: 71.8 },
+      { ethnicity: "Asian", percentage: 7.4 },
+      { ethnicity: "Hispanic", percentage: 9.6 },
+      { ethnicity: "Black", percentage: 5.9 }
     ]
     this.data[SEATTLE].values = [
       { ethnicity: "White", percentage: 66.2 },
@@ -52,11 +52,11 @@ class Diversity {
       { ethnicity: "Hispanic", percentage: 6.4 },
       { ethnicity: "Black", percentage: 7.2 }
     ]
-    this.data[HOUSTON].values = [
-      { ethnicity: "White", percentage: 22.5 },
-      { ethnicity: "Asian", percentage: 6.3 },
-      { ethnicity: "Hispanic", percentage: 43.9 },
-      { ethnicity: "Black", percentage: 22.8 }
+    this.data[AUSTIN].values = [
+      { ethnicity: "White", percentage: 48.7 },
+      { ethnicity: "Asian", percentage: 6.5 },
+      { ethnicity: "Hispanic", percentage: 34.8 },
+      { ethnicity: "Black", percentage: 7.5 }
     ]
     this.data[SAN_JOSE].values = [
       { ethnicity: "White", percentage: 27.5 },
@@ -119,7 +119,7 @@ class Diversity {
       .data(Object.values(this.data))
       .enter()
       .append('path')
-      .attr('transform', 'translate(25, 0)') // FIXME: why do I have to do this
+      .attr('transform', 'translate(25, 5)') // FIXME: why do I have to do this
       .attr('class', d => `line city ${d.class}`)
       .attr('d', d => line(d.values))
       .style('stroke', d => d.color)
