@@ -40,7 +40,7 @@ class SunnyDays {
     const svg = d3.select('svg.sunnyDays')
       .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", `translate(${MARGINS}, ${MARGINS})`)
+      .attr("transform", `translate(${MARGINS}, ${MARGINS / 2})`)
 
     // x axis - sunny days
     const xScale = d3.scaleLinear()

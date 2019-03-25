@@ -94,8 +94,6 @@ svg {
 }
 
 .topCharts {
-  height: 400px;
-  padding: 10px 0;
 }
 
 .topCharts:after,
@@ -117,6 +115,7 @@ svg {
 .map-container {
   width: 50%;
   height: 400px;
+  margin-top: 20px;
   float: left;
   position: relative;
 }
@@ -159,4 +158,12 @@ svg {
 .city-pinpoint {
   animation: bounce 0.5s infinite;
   animation-direction: alternate;
+}
+
+h1 {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+  font-weight: 700;
 }

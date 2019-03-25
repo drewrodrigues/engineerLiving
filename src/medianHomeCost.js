@@ -42,7 +42,7 @@ class MedianHomeCost {
     const svg = d3.select('svg.medianHomeCost')
       .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", "translate(100, 100)")
+      .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
 
     // x axis
     const xScale = d3.scaleLinear()
