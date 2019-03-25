@@ -21,19 +21,19 @@ class Map {
 
     this.data[SAN_FRANCISCO].position = { x: 20, y: 160 }
     this.data[SAN_FRANCISCO].ranking = 1
-    this.data[NEW_YORK].position = { x: 650, y: 135 }
+    this.data[NEW_YORK].position = { x: 625, y: 135 }
     this.data[NEW_YORK].ranking = 2
     this.data[PORTLAND].position = { x: 45, y: 90 }
     this.data[PORTLAND].ranking = 3
-    this.data[BOSTON].position = { x: 680, y: 100 }
+    this.data[BOSTON].position = { x: 650, y: 100 }
     this.data[BOSTON].ranking = 4
     this.data[SEATTLE].position = { x: 45, y: 40 }
     this.data[SEATTLE].ranking = 5
-    this.data[AUSTIN].position = { x: 340, y: 350 }
+    this.data[AUSTIN].position = { x: 320, y: 350 }
     this.data[AUSTIN].ranking = 6
     this.data[SAN_JOSE].position = { x: 35, y: 190 }
     this.data[SAN_JOSE].ranking = 7
-    this.data[RALEIGN].position = { x: 610, y: 210 }
+    this.data[RALEIGN].position = { x: 600, y: 210 }
     this.data[RALEIGN].ranking = 8
     this.data[DENVER].position = { x: 250, y: 170 }
     this.data[DENVER].ranking = 9
