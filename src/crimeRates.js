@@ -51,7 +51,7 @@ class CrimeRates {
 
   render() {
     const svg = d3.select('svg.crimeRates')
-      .attr('height', HEIGHT + MARGINS * 2).attr('width', WIDTH + MARGINS * 2 + 100)
+      .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2 + 100)
     const chart = svg.append('g')
       .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
     

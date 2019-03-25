@@ -115,7 +115,6 @@ svg {
 .map-container {
   width: 50%;
   height: 400px;
-  margin-top: 20px;
   float: left;
   position: relative;
 }
@@ -164,6 +163,6 @@ h1 {
   font-size: 24px;
   text-align: center;
   margin-top: 20px;
-  color: black;
+  color: #ccc;
   font-weight: 700;
 }
