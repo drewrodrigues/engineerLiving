@@ -115,16 +115,34 @@ class Diversity {
       .y(d => yScale(d.percentage))
     
     // add lines
-    chart.selectAll()
+    chart.selectAll('.line')
       .data(Object.values(this.data))
       .enter()
       .append('path')
-      .attr('transform', 'translate(25, 5)') // FIXME: why do I have to do this
+      .attr('transform', 'translate(25, 5)')
       .attr('class', d => `line city ${d.class}`)
       .attr('d', d => line(d.values))
       .style('stroke', d => d.color)
       .style('stroke-width', 5)
       .style('stroke-linecap', 'round')
+    
+    // percentage text
+    chart.selectAll()
+      .data(() => Object.values(this.data))
+      .enter()
+      .append('g')
+      .attr('class', d => `city ${d.class}`)
+      .selectAll('.line-point')
+      .data(d => d.values)
+      .enter()
+      .append('text')
+      .text(d => `${parseInt(d.percentage)}%`)
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('x', (d, i) => (WIDTH / 4) * i + 20)
+      .attr('y', d => HEIGHT - HEIGHT * (d.percentage / 70))
     
     // bottom label
     chart.append('text')
