@@ -47,11 +47,11 @@ class MedianHomeCost {
 
     // x axis
     const xScale = d3.scaleLinear()
-      .domain([0, 13.3])
+      .domain([0, 1350])
       .range([0, WIDTH])
 
     chart.append('g')
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale).ticks(5))
       .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis
@@ -62,14 +62,6 @@ class MedianHomeCost {
     
     chart.append('g')
       .call(d3.axisLeft(yScale))
-    
-    // bottom label
-    chart.append('text')
-      .attr('class', 'label-text')
-      .attr('x', WIDTH / 2)
-      .attr('y', HEIGHT + 50)
-      .attr('text-anchor', 'middle')
-      .text("in $100,000")
 
     // top label
     chart.append('text')
@@ -93,7 +85,7 @@ class MedianHomeCost {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('width', d => xScale(d.cost) / 100000)
+      .attr('width', d => xScale(d.cost) / 1000)
 
     // sunny days text
     chart.selectAll(".sunny-price-bar")
@@ -115,7 +107,8 @@ class MedianHomeCost {
       .call(d3.axisBottom()
       .scale(xScale)
       .tickSize(WIDTH, 0, 0)
-      .tickFormat(''))
+      .tickFormat('')
+      .ticks(5))
   }
 }
 

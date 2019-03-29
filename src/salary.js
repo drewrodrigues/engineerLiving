@@ -60,7 +60,7 @@ class Salary {
       .range([0, WIDTH])
       
     chart.append('g')
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale).ticks(5))
       .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis - city
@@ -136,14 +136,6 @@ class Salary {
       .attr("y", (d, i) => i * 19.9 + 14)
       .attr('x', d => xScale(d.salary / 1000) + 5)
       .attr('class', d => `city ${d.class}`)
-    
-    // label bottom
-    chart.append("text")
-      .attr('class', 'label-text')
-      .attr("x", WIDTH/2)
-      .attr("y", HEIGHT + 50)
-      .attr("text-anchor", "middle")
-      .text("in $1,000")
       
     // label top
     chart.append("text")
@@ -159,7 +151,8 @@ class Salary {
       .call(d3.axisTop()
       .scale(xScale)
       .tickSize(-WIDTH, 0, 0)
-      .tickFormat(''))
+      .tickFormat('')
+      .ticks(5))
   }
 }
 

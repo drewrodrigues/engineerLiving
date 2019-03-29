@@ -107,7 +107,7 @@ class Diversity {
       .range([0, HEIGHT])
 
     chart.append('g')
-      .call(d3.axisLeft(yScale))
+      .call(d3.axisLeft(yScale).ticks(5))
 
     // data
     let line = d3.line()
@@ -143,14 +143,6 @@ class Diversity {
         .duration(ANIMATION_DURATION)
       .attr('x', (d, i) => (WIDTH / 4) * i + 20)
       .attr('y', d => HEIGHT - HEIGHT * (d.percentage / 70))
-    
-    // bottom label
-    chart.append('text')
-      .attr('class', 'label-text')
-      .attr('x', WIDTH / 2)
-      .attr('y', HEIGHT + 50)
-      .attr('text-anchor', 'middle')
-      .text('Ethnicity')
 
     // left label
     chart.append('text')
@@ -176,7 +168,8 @@ class Diversity {
       .call(d3.axisRight()
       .scale(yScale)
       .tickSize(WIDTH, 0, 0)
-      .tickFormat(''))
+      .tickFormat('')
+      .ticks(5))
   }
 }
 

@@ -48,7 +48,7 @@ class SunnyDays {
       .range([0, WIDTH])
       
     chart.append('g')
-      .call(d3.axisBottom(xScale))
+      .call(d3.axisBottom(xScale).ticks(5))
       .attr("transform", `translate(0, ${HEIGHT})`)
 
     // y axis - city
@@ -99,15 +99,8 @@ class SunnyDays {
       .call(d3.axisTop()
             .scale(xScale)
             .tickSize(-WIDTH, 0, 0)
-            .tickFormat(''))
-    
-    // label bottom
-    chart.append("text")
-      .attr('class', 'label-text')
-      .attr("x", WIDTH/2)
-      .attr("y", HEIGHT + 50)
-      .attr("text-anchor", "middle")
-      .text("Days")
+            .tickFormat('')
+            .ticks(5))
       
     // label top
     chart.append("text")
