@@ -43,10 +43,11 @@ class MedianHomeCost {
       .attr("height", HEIGHT + MARGINS * 2 - 90).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
       .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
+    const format = d3.format("$,")
 
     // x axis
     const xScale = d3.scaleLinear()
-      .domain([0, 14])
+      .domain([0, 13.3])
       .range([0, WIDTH])
 
     chart.append('g')
@@ -79,7 +80,7 @@ class MedianHomeCost {
       .text("Median Home Price")
 
     // fill rects
-    chart.selectAll()
+    chart.selectAll('.home-price-bar')
       .data(Object.values(this.data))
       .enter()
       .append('rect')
@@ -93,6 +94,21 @@ class MedianHomeCost {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('width', d => xScale(d.cost) / 100000)
+
+    // sunny days text
+    chart.selectAll(".sunny-price-bar")
+      .data(Object.values(this.data))
+      .enter()
+      .append("text")
+      .text(d => format(parseInt(d.cost / 1000)) + "K")
+      .style('fill', '#fff')
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('x', 5)
+      .attr("y", (d, i) => i * 19.9 + 14)
+      .attr('class', d => `city ${d.class}`)
 
     chart.append('g')
       .attr('class', 'grid')
