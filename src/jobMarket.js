@@ -49,15 +49,15 @@ class JobMarket {
       .value(d => d.jobs)
     
     let arc = d3.arc()
-      .innerRadius(radius / 2)
+      .innerRadius(0)
       .outerRadius(radius)
     
     let labelArc = d3.arc()
-      .innerRadius(radius / 2)
+      .innerRadius(radius)
       .outerRadius(radius + 110)
 
     let percentageArc = d3.arc()
-      .innerRadius(radius / 2)
+      .innerRadius(radius)
       .outerRadius(radius)
 
     // pie chart
@@ -88,6 +88,10 @@ class JobMarket {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .text(d => d.data.city)
+        .attr("transform", function(d) { 
+          var midAngle = d.endAngle < Math.PI ? d.startAngle/2 + d.endAngle/2 : d.startAngle/2  + d.endAngle/2 + Math.PI
+          return `translate(${labelArc.centroid(d)[0]}, ${labelArc.centroid(d)[1]}) rotate(-95) rotate(${midAngle * 180/Math.PI})`;
+        })
     
     // percentage label
     chart
@@ -98,11 +102,16 @@ class JobMarket {
       .attr('class', d => `city ${d.data.class}`)
       .attr('text-anchor', 'middle')
       .attr("transform",  d => `translate(${percentageArc.centroid(d)})`)
+      .style('fill', '#fff')
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .text(d => d.data.jobs)
+        .attr("transform", function(d) { 
+          var midAngle = d.endAngle < Math.PI ? d.startAngle/2 + d.endAngle/2 : d.startAngle/2  + d.endAngle/2 + Math.PI
+          return `translate(${labelArc.centroid(d)[0]*.5}, ${labelArc.centroid(d)[1]*.5}) rotate(-95) rotate(${midAngle * 180/Math.PI})`;
+        })
   }
 }
 
