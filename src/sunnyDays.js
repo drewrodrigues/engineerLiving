@@ -44,7 +44,7 @@ class SunnyDays {
 
     // x axis - sunny days
     const xScale = d3.scaleLinear()
-      .domain([140, 300])
+      .domain([120, 300])
       .range([0, WIDTH])
       
     chart.append('g')
@@ -62,7 +62,7 @@ class SunnyDays {
       .call(d3.axisLeft(yScale))
 
     // fill rects
-    chart.selectAll()
+    chart.selectAll('.sunny-day-bar')
       .data(Object.values(this.data))
       .enter()
       .append('rect')
@@ -77,6 +77,21 @@ class SunnyDays {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('width', d => xScale(d.days))
+    
+    // sunny days text
+    chart.selectAll(".sunny-day-bar")
+      .data(Object.values(this.data))
+      .enter()
+      .append("text")
+      .text(d => d.days)
+      .style('fill', '#fff')
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('x', 5)
+      .attr("y", (d, i) => i * 19.9 + 14)
+      .attr('class', d => `city ${d.class}`)
 
     // grid lines
     chart.append('g')
