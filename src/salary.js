@@ -25,7 +25,7 @@ class Salary {
     // https://www.glassdoor.com/blog/25-best-paying-cities-software-engineers/
     this.data[SAN_FRANCISCO].salary = 120000
     this.data[SAN_FRANCISCO].adjusted = 99751
-    this.data[NEW_YORK].salary = 110000 // TODO: sad :()
+    this.data[NEW_YORK].salary = 110000
     this.data[NEW_YORK].adjusted = 100000
     this.data[PORTLAND].salary = 90000
     this.data[PORTLAND].adjusted = 89374
@@ -52,10 +52,11 @@ class Salary {
       .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
       .attr("transform", `translate(${MARGINS}, ${MARGINS})`)
+    const format = d3.format("$,")
 
     // x axis - salary
     const xScale = d3.scaleLinear()
-      .domain([85, 125])
+      .domain([75, 125])
       .range([0, WIDTH])
       
     chart.append('g')
@@ -73,7 +74,7 @@ class Salary {
       .call(d3.axisLeft(yScale))
 
     // rectangles - salary
-    chart.selectAll()
+    chart.selectAll(".bar")
       .data(Object.values(this.data))
       .enter()
       .append('rect')
@@ -105,14 +106,36 @@ class Salary {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('width', d => xScale(d.adjusted / 1000))
-
-    // grid lines
-    chart.append('g')
-      .attr('class', 'grid')
-      .call(d3.axisTop()
-            .scale(xScale)
-            .tickSize(-WIDTH, 0, 0)
-            .tickFormat(''))
+    
+    // adjusted text
+    chart.selectAll(".bar")
+      .data(Object.values(this.data))
+      .enter()
+      .append("text")
+      .text(d => format(d.adjusted))
+      .style('fill', '#fff')
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .attr('x', 5)
+      .attr("y", (d, i) => i * 19.9 + 14)
+      .attr('class', d => `city ${d.class}`)
+    
+    // median salary
+    chart.selectAll(".bar")
+      .data(Object.values(this.data))
+      .enter()
+      .append("text")
+      .style('fill', '#aaa')
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+      .text(d => format(d.salary))
+      .attr("y", (d, i) => i * 19.9 + 14)
+      .attr('x', d => xScale(d.salary / 1000) + 5)
+      .attr('class', d => `city ${d.class}`)
     
     // label bottom
     chart.append("text")
@@ -128,7 +151,15 @@ class Salary {
       .attr("x", WIDTH / 2)
       .attr("y", -20)
       .attr('text-anchor', 'middle')
-      .text("Adjusted Salary")
+      .text("Adjusted Salary / Median Salary")
+
+    // grid lines
+    chart.append('g')
+      .attr('class', 'grid')
+      .call(d3.axisTop()
+      .scale(xScale)
+      .tickSize(-WIDTH, 0, 0)
+      .tickFormat(''))
   }
 }
 
