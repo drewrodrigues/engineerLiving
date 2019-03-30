@@ -35,6 +35,12 @@ class Filtering {
         cityDiversityPercentages.forEach(percentage => {
           percentage.classList.add("show")
         })
+
+        // show job market text
+        const jobMarket = document.querySelectorAll(`.${className}.city-data-toggle`)
+        jobMarket.forEach(percentage => {
+          percentage.classList.add("show")
+        })
       })
       .on('mouseleave', () => {
         const allCityData = document.querySelectorAll('.city')
@@ -45,6 +51,12 @@ class Filtering {
         // hide diversity percentages
         const cityDiversityPercentages = document.querySelectorAll(`.city-percentage`)
         cityDiversityPercentages.forEach(percentage => {
+          percentage.classList.remove("show")
+        })
+
+        // hide job market text
+        const jobMarket = document.querySelectorAll(`.city-data-toggle`)
+        jobMarket.forEach(percentage => {
           percentage.classList.remove("show")
         })
       })

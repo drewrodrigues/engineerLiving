@@ -57,7 +57,7 @@ class JobMarket {
       .outerRadius(radius + 110)
 
     let percentageArc = d3.arc()
-      .innerRadius(radius)
+      .innerRadius(radius / 2)
       .outerRadius(radius)
 
     // pie chart
@@ -99,19 +99,14 @@ class JobMarket {
       .data(pie(Object.values(this.data)))
       .enter()
       .append("text")
-      .attr('class', d => `city ${d.data.class}`)
+      .attr('class', d => `city ${d.data.class} city-data-toggle`)
       .attr('text-anchor', 'middle')
       .attr("transform",  d => `translate(${percentageArc.centroid(d)})`)
-      .style('fill', '#fff')
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .text(d => d.data.jobs)
-        .attr("transform", function(d) { 
-          var midAngle = d.endAngle < Math.PI ? d.startAngle/2 + d.endAngle/2 : d.startAngle/2  + d.endAngle/2 + Math.PI
-          return `translate(${labelArc.centroid(d)[0]*.5}, ${labelArc.centroid(d)[1]*.5}) rotate(-95) rotate(${midAngle * 180/Math.PI})`;
-        })
   }
 }
 

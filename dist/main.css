@@ -160,6 +160,14 @@ text.city {
   opacity: 0;
 }
 
+.city-data-toggle {
+  opacity: 0;
+}
+
+.city-data-toggle.show {
+  opacity: 1
+}
+
 .city-percentage.show {
   opacity: 1;
 }
