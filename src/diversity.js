@@ -136,7 +136,6 @@ class Diversity {
       .data(d => d.values)
       .enter()
       .append('text')
-      .style('opacity', 0)
       .text(d => `${parseInt(d.percentage)}%`)
       .transition()
         .ease(ANIMATION_EASING)

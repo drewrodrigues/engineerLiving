@@ -29,11 +29,23 @@ class Filtering {
         allOtherCityData.forEach(data => {
           data.classList.add("filter")
         })
+
+        // show diversity percentages
+        const cityDiversityPercentages = document.querySelectorAll(`.${className}.city-percentage`)
+        cityDiversityPercentages.forEach(percentage => {
+          percentage.classList.add("show")
+        })
       })
       .on('mouseleave', () => {
         const allCityData = document.querySelectorAll('.city')
         allCityData.forEach(data => {
           data.classList.remove("filter")
+        })
+
+        // hide diversity percentages
+        const cityDiversityPercentages = document.querySelectorAll(`.city-percentage`)
+        cityDiversityPercentages.forEach(percentage => {
+          percentage.classList.remove("show")
         })
       })
   }

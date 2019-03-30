@@ -153,6 +153,13 @@ h1 {
 }
 
 text.city {
-  /* user-select: none; */
   z-index: 10;
+}
+
+.city-percentage {
+  opacity: 0;
+}
+
+.city-percentage.show {
+  opacity: 1;
 }
