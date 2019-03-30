@@ -114,13 +114,13 @@ class Salary {
       .append("text")
       .text(d => format(parseInt(d.adjusted/1000)) + "K")
       .style('fill', '#fff')
+      .attr('class', d => `city ${d.class}`)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('x', 5)
       .attr("y", (d, i) => i * 19.9 + 14)
-      .attr('class', d => `city ${d.class}`)
     
     // median salary
     chart.selectAll(".bar")
@@ -128,6 +128,7 @@ class Salary {
       .enter()
       .append("text")
       .style('fill', '#aaa')
+      .attr('class', d => `city ${d.class}`)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
@@ -135,7 +136,6 @@ class Salary {
       .text(d => format(parseInt(d.salary/1000)) + "K")
       .attr("y", (d, i) => i * 19.9 + 14)
       .attr('x', d => xScale(d.salary / 1000) + 5)
-      .attr('class', d => `city ${d.class}`)
       
     // label top
     chart.append("text")

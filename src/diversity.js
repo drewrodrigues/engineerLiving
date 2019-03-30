@@ -131,11 +131,12 @@ class Diversity {
       .data(() => Object.values(this.data))
       .enter()
       .append('g')
-      .attr('class', d => `city ${d.class}`)
+      .attr('class', d => `city ${d.class} city-percentage`)
       .selectAll('.line-point')
       .data(d => d.values)
       .enter()
       .append('text')
+      .style('opacity', 0)
       .text(d => `${parseInt(d.percentage)}%`)
       .transition()
         .ease(ANIMATION_EASING)
@@ -162,7 +163,6 @@ class Diversity {
       .text('Diversity')
 
     // grid lines
-    // grid line
     chart.append('g')
       .attr('class', 'grid')
       .call(d3.axisRight()

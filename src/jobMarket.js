@@ -66,13 +66,13 @@ class JobMarket {
       .data(pie(Object.values(this.data)))
       .enter()
       .append('path')
+      .attr('class', d => `city ${d.data.class}`)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('d', arc)
       .attr('fill', d => d.data.color)
-      .attr('class', d => `city ${d.data.class}`)
   
     // city label
     chart

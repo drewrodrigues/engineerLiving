@@ -146,3 +146,13 @@ h1 {
   color: #ccc;
   font-weight: 700;
 }
+
+.city {
+  cursor: pointer;
+  z-index: 100;
+}
+
+text.city {
+  /* user-select: none; */
+  z-index: 10;
+}

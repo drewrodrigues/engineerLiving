@@ -60,12 +60,12 @@ class Map {
       .attr('r', 15)
       .attr('width', 10)
       .style('fill', d => "rgba(0,0,0,0.3)")
+      .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
       .attr('cy', d => d.position.y + 5)
       .attr('cx', d => d.position.x)
-      .attr('class', d => `city ${d.class} city-pinpoint`)
   }
 
   mainCircle() {
@@ -74,28 +74,15 @@ class Map {
       .enter()
       .append('circle')
       .attr('r', 15)
-      .on('mouseenter', (d, i) => {
-        // fade all other city data
-        let allOtherCityData = document.querySelectorAll(`.city:not(.${d.class})`)
-        allOtherCityData.forEach(data => {
-          data.classList.add("filter")
-        })
-      })
-      .on('mouseout', () => {
-        let allCityData = document.querySelectorAll('.city')
-        allCityData.forEach(data => {
-          data.classList.remove("filter")
-        })
-      })
       .style('fill', 'none')
       .style('cursor', 'pointer')
+      .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
         .style('fill', d => d.color)
         .attr('cy', d => d.position.y)
         .attr('cx', d => d.position.x)
-      .attr('class', d => `city ${d.class} city-pinpoint`)
   }
 
   innerWhiteCircle() {
@@ -106,6 +93,7 @@ class Map {
       .append('circle')
       .attr('r', 10)
       .style('fill', d => "#fff")
+      .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
@@ -113,7 +101,6 @@ class Map {
       .attr('cx', d => d.position.x)
       .style('z-index', 10)
       .style('cursor', 'pointer')
-      .attr('class', d => `city ${d.class} city-pinpoint`)
   }
 
   cityLabel() {
@@ -127,20 +114,6 @@ class Map {
       .style('font-size', 14)
       .style('stroke-width', 3)
       .attr('fill', d => d.color)
-      .on('mouseenter', (d, i) => {
-        // fade all other city data
-        let allOtherCityData = document.querySelectorAll(`.city:not(.${d.class})`)
-        allOtherCityData.forEach(data => {
-          data.classList.add("filter")
-        })
-      })
-      .on('mouseleave', () => {
-        let allCityData = document.querySelectorAll('.city')
-        allCityData.forEach(data => {
-          data.classList.remove("filter")
-        })
-      })
-      // animation
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION / 1.5)
@@ -167,14 +140,13 @@ class Map {
       .text(d => d.ranking)
       .style('fill', d => d.color)
       .style('font-size', 16)
+      .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
       .attr('y', d => d.position.y + 6)
       .attr('x', d => d.position.x)
       .style('text-anchor', 'middle')
-      .attr('class', d => `city ${d.class}`)
-      .attr('class', d => `city ${d.class} city-pinpoint`)
   }
 }
 
