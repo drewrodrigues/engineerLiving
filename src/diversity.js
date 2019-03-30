@@ -131,7 +131,7 @@ class Diversity {
       .data(() => Object.values(this.data))
       .enter()
       .append('g')
-      .attr('class', d => `city ${d.class} city-percentage`)
+      .attr('class', d => `city ${d.class} city-data-toggle`)
       .selectAll('.line-point')
       .data(d => d.values)
       .enter()

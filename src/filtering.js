@@ -30,16 +30,10 @@ class Filtering {
           data.classList.add("filter")
         })
 
-        // show diversity percentages
-        const cityDiversityPercentages = document.querySelectorAll(`.${className}.city-percentage`)
-        cityDiversityPercentages.forEach(percentage => {
-          percentage.classList.add("show")
-        })
-
-        // show job market text
-        const jobMarket = document.querySelectorAll(`.${className}.city-data-toggle`)
-        jobMarket.forEach(percentage => {
-          percentage.classList.add("show")
+        // show toggleable data
+        const toggleableData = document.querySelectorAll(`.${className}.city-data-toggle`)
+        toggleableData.forEach(data => {
+          data.classList.add("show")
         })
       })
       .on('mouseleave', () => {
@@ -47,17 +41,11 @@ class Filtering {
         allCityData.forEach(data => {
           data.classList.remove("filter")
         })
-
-        // hide diversity percentages
-        const cityDiversityPercentages = document.querySelectorAll(`.city-percentage`)
-        cityDiversityPercentages.forEach(percentage => {
-          percentage.classList.remove("show")
-        })
-
-        // hide job market text
-        const jobMarket = document.querySelectorAll(`.city-data-toggle`)
-        jobMarket.forEach(percentage => {
-          percentage.classList.remove("show")
+        
+        // hide toggleable data
+        const toggleableData = document.querySelectorAll(`.city-data-toggle`)
+        toggleableData.forEach(data => {
+          data.classList.remove("show")
         })
       })
   }
