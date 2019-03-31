@@ -53,6 +53,7 @@ class JobMarket {
     this._addPieChart()
     this._addCityLabel()
     this._addCountLabel()
+    this._middleLabel()
   }
 
   _setChartVariables() {
@@ -115,6 +116,13 @@ class JobMarket {
       .attr('text-anchor', 'middle')
       .attr('transform',  d => `translate(${this.percentageArc.centroid(d)})`)
       .text(d => d.data.jobs)
+  }
+
+  _middleLabel() {
+    this.chart
+      .append('text')
+      .attr('text-anchor', 'middle')
+      .text('Open Jobs')
   }
 }
 
