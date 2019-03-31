@@ -41,6 +41,7 @@ class SunnyDays {
       .attr("height", HEIGHT + MARGINS * 2 - 90).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
       .attr("transform", `translate(${MARGINS}, ${MARGINS / 2})`)
+    const sortedData = Object.values(this.data).sort((a, b) => b.days - a.days)
 
     // x axis - sunny days
     const xScale = d3.scaleLinear()
@@ -53,7 +54,7 @@ class SunnyDays {
 
     // y axis - city
     const yScale = d3.scaleBand()
-      .domain(Object.values(this.data).map(d => d.city))
+      .domain(sortedData.map(d => d.city))
       .range([0, WIDTH])
       .padding(0.1)
 
@@ -63,7 +64,7 @@ class SunnyDays {
 
     // fill rects
     chart.selectAll('.sunny-day-bar')
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
@@ -80,7 +81,7 @@ class SunnyDays {
     
     // sunny days text
     chart.selectAll(".sunny-day-bar")
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append("text")
       .text(d => d.days)
