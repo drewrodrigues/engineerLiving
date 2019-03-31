@@ -2,6 +2,7 @@ class Filtering {
   constructor() {
     this.filterTicks()
     this.filterData()
+    this.colorTitle()
   }
 
   filterTicks() {
@@ -47,6 +48,17 @@ class Filtering {
         toggleableData.forEach(data => {
           data.classList.remove("show")
         })
+      })
+  }
+
+  colorTitle() {
+    const title = d3.select('h1')
+    d3.selectAll('.city')
+      .on('mouseenter', d => {
+        title.style('color', d.color)
+      })
+      .on('mouseout', d => {
+        title.style('color', '#ccc')
       })
   }
 }

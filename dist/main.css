@@ -72,9 +72,7 @@ svg {
 .container {
   width: 1400px;
   margin: 0 auto;
-}
-
-.topCharts {
+  position: relative;
 }
 
 .topCharts:after,
@@ -142,10 +140,12 @@ svg {
 
 h1 {
   font-size: 24px;
-  text-align: center;
+  position: absolute;
+  left: 100px;
   margin-top: 20px;
   color: #ccc;
   font-weight: 700;
+  transition: 0.5s color;
 }
 
 .city {
