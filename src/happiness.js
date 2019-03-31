@@ -66,12 +66,12 @@ class Happiness {
       .attr('class', d => `city ${d.class}`)
       .style('fill', d => d.color)
       .attr('height', HEIGHT / this.sortedData.length)
-      .attr('width', WIDTH)
       .attr('y', (d, i) => 20 * i)
       .transition()
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
+        .attr('width', WIDTH)
   }
 
   _addText() {

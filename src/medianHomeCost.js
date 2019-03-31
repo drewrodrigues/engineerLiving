@@ -40,10 +40,10 @@ class MedianHomeCost {
 
   render() {
     const svg = d3.select('svg.medianHomeCost')
-      .attr("height", HEIGHT + MARGINS * 2 - 90).attr("width", WIDTH + MARGINS * 2)
+      .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
-    const format = d3.format("$,")
+      .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
+    const format = d3.format('$,')
     const sortedData = Object.values(this.data).sort((a, b) => a.cost - b.cost)
 
     // x axis
@@ -53,7 +53,7 @@ class MedianHomeCost {
 
     chart.append('g')
       .call(d3.axisBottom(xScale).ticks(5))
-      .attr("transform", `translate(0, ${HEIGHT})`)
+      .attr('transform', `translate(0, ${HEIGHT})`)
 
     // y axis
     const yScale = d3.scaleBand()
@@ -70,7 +70,7 @@ class MedianHomeCost {
       .attr('x', WIDTH / 2)
       .attr('y', -20)
       .attr('text-anchor', 'middle')
-      .text("Median Home Price")
+      .text('Median Home Price')
 
     // fill rects
     chart.selectAll('.home-price-bar')
@@ -86,21 +86,21 @@ class MedianHomeCost {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('width', d => xScale(d.cost) / 1000)
+        .attr('width', d => xScale(d.cost) / 1000)
 
     // sunny days text
-    chart.selectAll(".sunny-price-bar")
+    chart.selectAll('.sunny-price-bar')
       .data(sortedData)
       .enter()
-      .append("text")
-      .text(d => format(parseInt(d.cost / 1000)) + "K")
+      .append('text')
+      .text(d => format(parseInt(d.cost / 1000)) + 'K')
       .style('fill', '#fff')
+      .attr('y', (d, i) => i * 19.9 + 14)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('x', 5)
-      .attr("y", (d, i) => i * 19.9 + 14)
       .attr('class', d => `city ${d.class}`)
 
     chart.append('g')

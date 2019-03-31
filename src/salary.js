@@ -49,10 +49,10 @@ class Happiness {
 
   render() {
     const svg = d3.select('svg.salary')
-      .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
+      .attr('height', HEIGHT + MARGINS * 2).attr('width', WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
-    const format = d3.format("$,")
+      .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
+    const format = d3.format('$,')
     const orderedData = Object.values(this.data).sort((a, b) => b.adjusted - a.adjusted)
 
     // x axis - salary
@@ -62,7 +62,7 @@ class Happiness {
       
     chart.append('g')
       .call(d3.axisBottom(xScale).ticks(5))
-      .attr("transform", `translate(0, ${HEIGHT})`)
+      .attr('transform', `translate(0, ${HEIGHT})`)
 
     // y axis - city
     const yScale = d3.scaleBand()
@@ -75,7 +75,7 @@ class Happiness {
       .call(d3.axisLeft(yScale))
 
     // rectangles - salary
-    chart.selectAll(".bar")
+    chart.selectAll('.bar')
       .data(orderedData)
       .enter()
       .append('rect')
@@ -83,13 +83,13 @@ class Happiness {
       .attr('x', 1)
       .attr('y', d => yScale(d.city))
       .attr('height', yScale.bandwidth())
-      .style('fill', "#bbb")
+      .style('fill', '#bbb')
       // animation
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('width', d => xScale(d.salary / 1000))
+        .attr('width', d => xScale(d.salary / 1000))
 
     // rectangles - adjusted salary
     chart.selectAll()
@@ -106,45 +106,45 @@ class Happiness {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('width', d => xScale(d.adjusted / 1000))
+        .attr('width', d => xScale(d.adjusted / 1000))
     
     // adjusted text
-    chart.selectAll(".bar")
+    chart.selectAll('.bar')
       .data(orderedData)
       .enter()
-      .append("text")
-      .text(d => format(parseInt(d.adjusted/1000)) + "K")
+      .append('text')
+      .text(d => format(parseInt(d.adjusted/1000)) + 'K')
       .style('fill', '#fff')
       .attr('class', d => `city ${d.class}`)
+      .attr('y', (d, i) => i * 19.9 + 14)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('x', 5)
-      .attr("y", (d, i) => i * 19.9 + 14)
     
     // median salary
-    chart.selectAll(".bar")
+    chart.selectAll('.bar')
       .data(orderedData)
       .enter()
-      .append("text")
+      .append('text')
       .style('fill', '#aaa')
       .attr('class', d => `city ${d.class}`)
+      .attr('y', (d, i) => i * 19.9 + 14)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .text(d => format(parseInt(d.salary/1000)) + "K")
-      .attr("y", (d, i) => i * 19.9 + 14)
+      .text(d => format(parseInt(d.salary/1000)) + 'K')
       .attr('x', d => xScale(d.salary / 1000) + 5)
       
     // label top
-    chart.append("text")
+    chart.append('text')
       .attr('class', 'label-text')
-      .attr("x", WIDTH / 2)
-      .attr("y", -20)
+      .attr('x', WIDTH / 2)
+      .attr('y', -20)
       .attr('text-anchor', 'middle')
-      .text("Adjusted Salary / Median Salary")
+      .text('Adjusted Salary / Median Salary')
 
     // grid lines
     chart.append('g')
