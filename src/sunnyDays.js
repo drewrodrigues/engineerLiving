@@ -20,6 +20,12 @@ import {
 
 class SunnyDays {
   constructor() {
+    this.setData()
+    this.setChart()
+    this.render()
+  }
+
+  setData() {
     this.data = CITIES
 
     this.data[SAN_FRANCISCO].days = 256
@@ -33,83 +39,101 @@ class SunnyDays {
     this.data[DENVER].days = 245
     this.data[PHOENIX].days = 299
 
-    this.render()
+    this.sortedData = Object.values(this.data).sort((a, b) => b.days - a.days)
+  }
+
+  setChart() {
+    const svg = d3.select('svg.sunnyDays')
+      .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2)
+    this.chart = svg.append('g')
+      .attr('transform', `translate(${MARGINS}, ${MARGINS / 2})`)
   }
 
   render() {
-    const svg = d3.select('svg.sunnyDays')
-      .attr("height", HEIGHT + MARGINS * 2 - 90).attr("width", WIDTH + MARGINS * 2)
-    const chart = svg.append('g')
-      .attr("transform", `translate(${MARGINS}, ${MARGINS / 2})`)
-    const sortedData = Object.values(this.data).sort((a, b) => b.days - a.days)
+    this._xAxis()
+    this._yAxis()
+    this._rectangles()
+    this._gridLines()
+    this._rectangleLabels()
+    this._labelTop()
+  }
 
-    // x axis - sunny days
-    const xScale = d3.scaleLinear()
+  _xAxis() {
+    this.xScale = d3.scaleLinear()
       .domain([120, 300])
       .range([0, WIDTH])
       
-    chart.append('g')
-      .call(d3.axisBottom(xScale).ticks(5))
-      .attr("transform", `translate(0, ${HEIGHT})`)
+    this.chart
+      .append('g')
+      .call(d3.axisBottom(this.xScale).ticks(5))
+      .attr('transform', `translate(0, ${HEIGHT})`)
+  }
 
-    // y axis - city
-    const yScale = d3.scaleBand()
-      .domain(sortedData.map(d => d.city))
+  _yAxis() {
+    this.yScale = d3.scaleBand()
+      .domain(this.sortedData.map(d => d.city))
       .range([0, WIDTH])
       .padding(0.1)
 
-    // city labels
-    chart.append('g')
-      .call(d3.axisLeft(yScale))
+    this.chart
+      .append('g')
+      .call(d3.axisLeft(this.yScale))
+  }
 
-    // fill rects
-    chart.selectAll('.sunny-day-bar')
-      .data(sortedData)
+  _rectangles() {
+    this.chart
+      .selectAll('.sunny-day-bar')
+      .data(this.sortedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
       .attr('x', 1)
-      .attr('y', d => yScale(d.city))
-      .attr('height', yScale.bandwidth())
+      .attr('y', d => this.yScale(d.city))
+      .attr('height', this.yScale.bandwidth())
       .style('fill', d => d.color)
-      // animation
       .transition()
-        .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('width', d => xScale(d.days))
-    
-    // sunny days text
-    chart.selectAll(".sunny-day-bar")
-      .data(sortedData)
-      .enter()
-      .append("text")
-      .text(d => d.days)
-      .style('fill', '#fff')
-      .transition()
         .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
-      .attr('x', 5)
-      .attr("y", (d, i) => i * 19.9 + 14)
-      .attr('class', d => `city ${d.class}`)
+        .attr('width', d => this.xScale(d.days))
+  }
 
-    // grid lines
-    chart.append('g')
+  _gridLines() {
+    this.chart
+      .append('g')
       .attr('class', 'grid')
       .call(d3.axisTop()
-            .scale(xScale)
-            .tickSize(-WIDTH, 0, 0)
-            .tickFormat('')
-            .ticks(5))
-      
-    // label top
-    chart.append("text")
+          .scale(this.xScale)
+          .tickFormat('')
+          .tickSize(-WIDTH, 0, 0)
+          .ticks(5))
+  }
+
+  _rectangleLabels() {
+    this.chart
+      .selectAll()
+      .data(this.sortedData)
+      .enter()
+      .append('text')
+      .attr('class', d => `city ${d.class}`)
+      .attr('y', (d, i) => i * 19.9 + 14)
+      .style('fill', '#fff')
+      .text(d => d.days)
+      .transition()
+        .ease(ANIMATION_EASING)
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+        .attr('x', 5)
+  }
+
+  _labelTop() {
+    this.chart
+      .append('text')
       .attr('class', 'label-text')
-      .attr("x", WIDTH / 2)
-      .attr("y", -20)
       .attr('text-anchor', 'middle')
-      .text("Sunny days per year")
+      .attr('x', WIDTH / 2)
+      .attr('y', -20)
+      .text('Sunny days per year')
   }
 }
 
