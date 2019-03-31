@@ -39,43 +39,36 @@ class Happiness {
   }
 
   render() {
-    const svg = d3.select('svg.crimeRates')
+    const svg = d3.select('svg.happiness')
       .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2 + 100)
     const chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
+      .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
     
-    // x axis - rank
-    const xScale = d3.scaleLinear()
-      .domain([145, 0])
-      .range([0, WIDTH])
-    
-    chart.append('g')
-      .call(d3.axisBottom(xScale))
-      .attr("transform", `translate(0, ${HEIGHT})`)
-
-    const yScale = d3.scaleBand()
-      .domain(Object.values(this.data).map(d => d.city))
-      .range([0, HEIGHT])
-      .padding(0.1)
-    
-    chart.append('g')
-      .call(d3.axisLeft(yScale))
-
-    // fill rects
-    chart.selectAll()
+    // create rectangles
+    chart.selectAll('.list-item-rects')
       .data(Object.values(this.data))
       .enter()
       .append('rect')
-      .attr('x', 1)
-      .attr('y', d => yScale(d.city))
-      .attr('height', yScale.bandwidth())
+      .attr('y', (d, i) => 20 * i)
+      .attr('width', WIDTH)
+      .attr('height', HEIGHT / Object.values(this.data).length)
       .style('fill', d => d.color)
       .attr('class', d => `city ${d.class}`)
       .transition()
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
-      .attr('width', d => xScale(d.rank))
+
+    // create text
+    chart.selectAll('.list-items')
+      .data(Object.values(this.data))
+      .enter()
+      .append('text')
+      .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
+      .attr('x', 10)
+      .attr('y', (d, i) => 20 * i + 14)
+      .style('fill', "#fff")
+      .attr('class', d => `city ${d.class}`)
     
     // top label
     chart.append("text")
@@ -84,29 +77,6 @@ class Happiness {
       .attr("y", -20)
       .attr("text-anchor", "middle")
       .text("Happiness Ranking")
-    
-    // grid line
-    chart.append('g')
-      .attr('class', 'grid')
-      .call(d3.axisTop()
-      .scale(xScale)
-      .tickSize(-WIDTH, 0, 0)
-      .tickFormat(''))
-
-    // rank text
-    chart.selectAll(".happiness-bar")
-      .data(Object.values(this.data))
-      .enter()
-      .append("text")
-      .text(d => d.rank)
-      .style('fill', '#fff')
-      .transition()
-        .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
-      .attr('x', 5)
-      .attr("y", (d, i) => i * 19.9 + 14)
-      .attr('class', d => `city ${d.class}`)
   }
 }
 

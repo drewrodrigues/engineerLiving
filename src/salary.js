@@ -18,7 +18,7 @@ import {
   MARGINS
 } from './constants'
 
-class Salary {
+class Happiness {
   constructor() {
     this.data = CITIES
 
@@ -51,7 +51,7 @@ class Salary {
     const svg = d3.select('svg.salary')
       .attr("height", HEIGHT + MARGINS * 2).attr("width", WIDTH + MARGINS * 2)
     const chart = svg.append('g')
-      .attr("transform", `translate(${MARGINS}, ${MARGINS})`)
+      .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
     const format = d3.format("$,")
 
     // x axis - salary
@@ -156,4 +156,4 @@ class Salary {
   }
 }
 
-export default Salary
+export default Happiness
