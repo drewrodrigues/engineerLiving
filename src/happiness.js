@@ -43,15 +43,16 @@ class Happiness {
       .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2 + 100)
     const chart = svg.append('g')
       .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
+    const sortedData = Object.values(this.data).sort((a, b) => a.rank - b.rank)
     
     // create rectangles
     chart.selectAll('.list-item-rects')
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append('rect')
       .attr('y', (d, i) => 20 * i)
       .attr('width', WIDTH)
-      .attr('height', HEIGHT / Object.values(this.data).length)
+      .attr('height', HEIGHT / sortedData.length)
       .style('fill', d => d.color)
       .attr('class', d => `city ${d.class}`)
       .transition()
@@ -61,7 +62,7 @@ class Happiness {
 
     // create text
     chart.selectAll('.list-items')
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append('text')
       .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
