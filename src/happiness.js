@@ -58,15 +58,16 @@ class Happiness {
   }
 
   _createRectangles() {
-    this.chart.selectAll('.list-item-rects')
+    this.chart
+      .selectAll()
       .data(this.sortedData)
       .enter()
       .append('rect')
-      .attr('y', (d, i) => 20 * i)
-      .attr('width', WIDTH)
-      .attr('height', HEIGHT / this.sortedData.length)
-      .style('fill', d => d.color)
       .attr('class', d => `city ${d.class}`)
+      .style('fill', d => d.color)
+      .attr('height', HEIGHT / this.sortedData.length)
+      .attr('width', WIDTH)
+      .attr('y', (d, i) => 20 * i)
       .transition()
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
@@ -74,24 +75,26 @@ class Happiness {
   }
 
   _addText() {
-    this.chart.selectAll('.list-items')
+    this.chart
+      .selectAll()
       .data(this.sortedData)
       .enter()
       .append('text')
-      .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
+      .attr('class', d => `city ${d.class}`)
       .attr('x', 10)
       .attr('y', (d, i) => 20 * i + 14)
-      .style('fill', "#fff")
-      .attr('class', d => `city ${d.class}`)
+      .style('fill', '#fff')
+      .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
   }
 
   _addTopLabel() {
-    this.chart.append("text")
+    this.chart
+      .append('text')
       .attr('class', 'label-text')
-      .attr("x", WIDTH / 2)
-      .attr("y", -20)
-      .attr("text-anchor", "middle")
-      .text("Happiness Ranking")
+      .attr('text-anchor', 'middle')
+      .attr('x', WIDTH / 2)
+      .attr('y', -20)
+      .text('Happiness Ranking')
   }
 }
 
