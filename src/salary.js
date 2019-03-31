@@ -53,6 +53,7 @@ class Happiness {
     const chart = svg.append('g')
       .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
     const format = d3.format("$,")
+    const orderedData = Object.values(this.data).sort((a, b) => b.adjusted - a.adjusted)
 
     // x axis - salary
     const xScale = d3.scaleLinear()
@@ -65,7 +66,7 @@ class Happiness {
 
     // y axis - city
     const yScale = d3.scaleBand()
-      .domain(Object.values(this.data).map(d => d.city))
+      .domain(orderedData.map(d => d.city))
       .range([0, WIDTH])
       .padding(0.1)
 
@@ -75,7 +76,7 @@ class Happiness {
 
     // rectangles - salary
     chart.selectAll(".bar")
-      .data(Object.values(this.data))
+      .data(orderedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
@@ -92,7 +93,7 @@ class Happiness {
 
     // rectangles - adjusted salary
     chart.selectAll()
-      .data(Object.values(this.data))
+      .data(orderedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
@@ -109,7 +110,7 @@ class Happiness {
     
     // adjusted text
     chart.selectAll(".bar")
-      .data(Object.values(this.data))
+      .data(orderedData)
       .enter()
       .append("text")
       .text(d => format(parseInt(d.adjusted/1000)) + "K")
@@ -124,7 +125,7 @@ class Happiness {
     
     // median salary
     chart.selectAll(".bar")
-      .data(Object.values(this.data))
+      .data(orderedData)
       .enter()
       .append("text")
       .style('fill', '#aaa')
