@@ -20,10 +20,15 @@ import {
 
 class Happiness {
   constructor() {
+    this.setData()
+    this.setChart()
+    this.render()
+  }
+
+  setData() {
     this.data = CITIES
 
     // https://wallethub.com/edu/happiest-places-to-live/32619/
-
     this.data[SAN_FRANCISCO].rank = 10
     this.data[NEW_YORK].rank = 90
     this.data[BOSTON].rank = 58
@@ -35,34 +40,42 @@ class Happiness {
     this.data[DENVER].rank = 41
     this.data[PHOENIX].rank = 127
 
-    this.render()
+    this.sortedData = Object.values(this.data).sort((a, b) => a.rank - b.rank)
+  }
+
+  setChart() {
+    const svg = d3.select('svg.happiness')
+      .attr('height', HEIGHT + MARGINS * 2 - 90)
+      .attr('width', WIDTH + MARGINS * 2 + 100)
+    this.chart = svg.append('g')
+      .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
   }
 
   render() {
-    const svg = d3.select('svg.happiness')
-      .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2 + 100)
-    const chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
-    const sortedData = Object.values(this.data).sort((a, b) => a.rank - b.rank)
-    
-    // create rectangles
-    chart.selectAll('.list-item-rects')
-      .data(sortedData)
+    this._createRectangles()
+    this._addText()
+    this._addTopLabel()
+  }
+
+  _createRectangles() {
+    this.chart.selectAll('.list-item-rects')
+      .data(this.sortedData)
       .enter()
       .append('rect')
       .attr('y', (d, i) => 20 * i)
       .attr('width', WIDTH)
-      .attr('height', HEIGHT / sortedData.length)
+      .attr('height', HEIGHT / this.sortedData.length)
       .style('fill', d => d.color)
       .attr('class', d => `city ${d.class}`)
       .transition()
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
+  }
 
-    // create text
-    chart.selectAll('.list-items')
-      .data(sortedData)
+  _addText() {
+    this.chart.selectAll('.list-items')
+      .data(this.sortedData)
       .enter()
       .append('text')
       .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
@@ -70,9 +83,10 @@ class Happiness {
       .attr('y', (d, i) => 20 * i + 14)
       .style('fill', "#fff")
       .attr('class', d => `city ${d.class}`)
-    
-    // top label
-    chart.append("text")
+  }
+
+  _addTopLabel() {
+    this.chart.append("text")
       .attr('class', 'label-text')
       .attr("x", WIDTH / 2)
       .attr("y", -20)
