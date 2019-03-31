@@ -44,6 +44,7 @@ class MedianHomeCost {
     const chart = svg.append('g')
       .attr("transform", `translate(${MARGINS}, ${MARGINS/2})`)
     const format = d3.format("$,")
+    const sortedData = Object.values(this.data).sort((a, b) => a.cost - b.cost)
 
     // x axis
     const xScale = d3.scaleLinear()
@@ -56,7 +57,7 @@ class MedianHomeCost {
 
     // y axis
     const yScale = d3.scaleBand()
-      .domain(Object.values(this.data).map(d => d.city))
+      .domain(sortedData.map(d => d.city))
       .range([0, HEIGHT])
       .padding(0.1)
     
@@ -73,7 +74,7 @@ class MedianHomeCost {
 
     // fill rects
     chart.selectAll('.home-price-bar')
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
@@ -89,7 +90,7 @@ class MedianHomeCost {
 
     // sunny days text
     chart.selectAll(".sunny-price-bar")
-      .data(Object.values(this.data))
+      .data(sortedData)
       .enter()
       .append("text")
       .text(d => format(parseInt(d.cost / 1000)) + "K")
