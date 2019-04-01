@@ -25,7 +25,7 @@ class SunnyDays extends Chart {
     this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
     this.rectangles()
     this.gridLines(this.xScale, 'axisBottom')
-    this.rectangleLabels()
+    this.rectangleLabels('days')
     this.labelTop()
   }
 

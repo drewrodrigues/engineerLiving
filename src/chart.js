@@ -57,7 +57,7 @@ class Chart {
         .ticks(ticks))
   }
 
-  rectangleLabels() {
+  rectangleLabels(text) {
     this.chart
       .selectAll()
       .data(this.sortedData)
@@ -66,7 +66,13 @@ class Chart {
       .attr('class', d => `city ${d.class}`)
       .attr('y', (d, i) => i * 19.9 + 14)
       .style('fill', '#fff')
-      .text(d => d.days)
+      .text((d, i) => {
+        if (typeof text === 'string') {
+          return d[text]
+        } else {
+          return text.call(d, i)
+        }
+      })
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
