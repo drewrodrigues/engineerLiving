@@ -123,7 +123,7 @@ class Diversity {
       .attr('class', d => `line city ${d.class}`)
       .attr('d', d => line(d.values))
       .style('stroke', d => d.color)
-      .style('stroke-width', 5)
+      .style('stroke-width', 2)
       .style('stroke-linecap', 'round')
     
     // percentage text
