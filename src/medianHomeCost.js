@@ -93,6 +93,7 @@ class MedianHomeCost {
       .data(sortedData)
       .enter()
       .append('text')
+      .attr('class', d => `city ${d.class}`)
       .text(d => format(parseInt(d.cost / 1000)) + 'K')
       .style('fill', '#fff')
       .attr('y', (d, i) => i * 19.9 + 14)
@@ -101,7 +102,6 @@ class MedianHomeCost {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
       .attr('x', 5)
-      .attr('class', d => `city ${d.class}`)
 
     chart.append('g')
       .attr('class', 'grid')
