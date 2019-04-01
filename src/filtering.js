@@ -1,27 +1,14 @@
 class Filtering {
   constructor() {
-    this.filterTicks()
     this.filterData()
     this.colorTitle()
-  }
-
-  filterTicks() {
-    d3.selectAll('.tick text')
-      .attr('class', function(d) {
-        let city = this.textContent
-        if (parseInt(city) || ["White", "Asian", "Hispanic", "Black"].includes(city)) return ""
-        let cityClass = this.textContent.split(' ').join('-')
-        return `city city-${cityClass}`
-      })
   }
 
   filterData() {
     d3.selectAll('.city')
       .on('mouseover', (d, i) => {
         let className
-        if (typeof d === "string") {
-          className = `city-${d.split(' ').join('-')}`
-        } else if (d.data) {
+        if (d.data) {
           className = d.data.class
         } else {
           className = d.class
@@ -55,7 +42,13 @@ class Filtering {
     const title = d3.select('h1')
     d3.selectAll('.city')
       .on('mouseenter', d => {
-        title.style('color', d.color)
+        let color
+        if (d.data) {
+          color = d.data.color
+        } else {
+          color = d.color
+        }
+        title.style('color', color)
       })
       .on('mouseout', d => {
         title.style('color', '#ccc')
