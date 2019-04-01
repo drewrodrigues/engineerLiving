@@ -8,7 +8,7 @@ import Salary from './salary'
 import Filtering from './filtering'
 
 document.addEventListener("DOMContentLoaded", () => {
-  new SunnyDays
+  new SunnyDays('svg.sunnyDays')
   new Salary
   new MedianHomeCost
   new Diversity

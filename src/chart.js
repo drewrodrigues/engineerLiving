@@ -8,13 +8,13 @@ import {
 } from './constants'
 
 class Chart {
-  constructor() {
-    this.setChart()
+  constructor(selector) {
+    this.setChart(selector)
     this.setData()
   }
 
-  setChart(options) {
-    const svg = d3.select('svg.sunnyDays')
+  setChart(selector) {
+    const svg = d3.select(selector)
       .attr('height', HEIGHT + MARGINS * 2)
       .attr('width', WIDTH + MARGINS * 2)
     this.chart = svg.append('g')

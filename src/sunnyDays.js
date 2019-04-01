@@ -18,11 +18,9 @@ import {
 import Chart from './chart'
 
 class SunnyDays extends Chart {
-  constructor() {
-    super()
+  constructor(selector) {
+    super(selector)
 
-    this.setData()
-    this.setChart()
     this.xAxis([120, 300], 'scaleLinear')
     this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
     this.rectangles()
