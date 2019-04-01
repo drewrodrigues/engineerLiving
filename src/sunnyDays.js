@@ -12,17 +12,23 @@ import {
   PHOENIX,
   ANIMATION_DELAY,
   ANIMATION_EASING,
-  ANIMATION_DURATION,
-  WIDTH,
-  HEIGHT,
-  MARGINS
+  ANIMATION_DURATION
 } from './constants'
 
-class SunnyDays {
+import Chart from './chart'
+
+class SunnyDays extends Chart {
   constructor() {
+    super()
+
     this.setData()
     this.setChart()
-    this.render()
+    this.xAxis([120, 300], 'scaleLinear')
+    this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
+    this.rectangles()
+    this.gridLines(this.xScale, 'axisBottom')
+    this.rectangleLabels()
+    this.labelTop()
   }
 
   setData() {
@@ -42,47 +48,9 @@ class SunnyDays {
     this.sortedData = Object.values(this.data).sort((a, b) => b.days - a.days)
   }
 
-  setChart() {
-    const svg = d3.select('svg.sunnyDays')
-      .attr('height', HEIGHT + MARGINS * 2 - 90).attr('width', WIDTH + MARGINS * 2)
-    this.chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS / 2})`)
-  }
-
-  render() {
-    this._xAxis()
-    this._yAxis()
-    this._rectangles()
-    this._gridLines()
-    this._rectangleLabels()
-    this._labelTop()
-  }
-
-  _xAxis() {
-    this.xScale = d3.scaleLinear()
-      .domain([120, 300])
-      .range([0, WIDTH])
-      
+  rectangles() {
     this.chart
-      .append('g')
-      .call(d3.axisBottom(this.xScale).ticks(5))
-      .attr('transform', `translate(0, ${HEIGHT})`)
-  }
-
-  _yAxis() {
-    this.yScale = d3.scaleBand()
-      .domain(this.sortedData.map(d => d.city))
-      .range([0, WIDTH])
-      .padding(0.1)
-
-    this.chart
-      .append('g')
-      .call(d3.axisLeft(this.yScale))
-  }
-
-  _rectangles() {
-    this.chart
-      .selectAll('.sunny-day-bar')
+      .selectAll()
       .data(this.sortedData)
       .enter()
       .append('rect')
@@ -96,44 +64,6 @@ class SunnyDays {
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
         .attr('width', d => this.xScale(d.days))
-  }
-
-  _gridLines() {
-    this.chart
-      .append('g')
-      .attr('class', 'grid')
-      .call(d3.axisTop()
-          .scale(this.xScale)
-          .tickFormat('')
-          .tickSize(-WIDTH, 0, 0)
-          .ticks(5))
-  }
-
-  _rectangleLabels() {
-    this.chart
-      .selectAll()
-      .data(this.sortedData)
-      .enter()
-      .append('text')
-      .attr('class', d => `city ${d.class}`)
-      .attr('y', (d, i) => i * 19.9 + 14)
-      .style('fill', '#fff')
-      .text(d => d.days)
-      .transition()
-        .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
-        .attr('x', 5)
-  }
-
-  _labelTop() {
-    this.chart
-      .append('text')
-      .attr('class', 'label-text')
-      .attr('text-anchor', 'middle')
-      .attr('x', WIDTH / 2)
-      .attr('y', -20)
-      .text('Sunny days per year')
   }
 }
 
