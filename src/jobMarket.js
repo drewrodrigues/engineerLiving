@@ -1,21 +1,9 @@
 import {
-  CITIES,
-  SAN_FRANCISCO,
-  NEW_YORK,
-  PORTLAND,
-  BOSTON,
-  SEATTLE,
-  AUSTIN,
-  SAN_JOSE,
-  RALEIGN,
-  DENVER,
-  PHOENIX,
   ANIMATION_DELAY,
   ANIMATION_EASING,
   ANIMATION_DURATION,
   WIDTH,
-  HEIGHT,
-  MARGINS
+  HEIGHT
 } from './constants'
 
 import Chart from './chart'
@@ -23,25 +11,7 @@ import Chart from './chart'
 class JobMarket extends Chart {
   constructor(selector) {
     super(selector, { topOffset: 150, leftOffset: 80 })
-
-    this.setData()
     this.render()
-  }
-
-  setData() {
-    this.data = CITIES
-
-    // indeed search: software engineer w/ exact location only 3/24/2019
-    this.data[SAN_FRANCISCO].jobs = 7947
-    this.data[NEW_YORK].jobs = 8364
-    this.data[BOSTON].jobs = 3630
-    this.data[PORTLAND].jobs = 2359
-    this.data[SEATTLE].jobs = 10417
-    this.data[AUSTIN].jobs = 4308
-    this.data[SAN_JOSE].jobs = 3023
-    this.data[RALEIGN].jobs = 1377 // FIXME: RALEIGH
-    this.data[DENVER].jobs = 1973
-    this.data[PHOENIX].jobs = 1491
   }
 
   render() {

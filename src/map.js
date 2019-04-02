@@ -1,24 +1,14 @@
 import {
-  CITIES,
-  SAN_FRANCISCO,
-  NEW_YORK,
-  PORTLAND,
-  BOSTON,
-  SEATTLE,
-  AUSTIN,
-  SAN_JOSE,
-  RALEIGN,
-  DENVER,
-  PHOENIX,
-  ANIMATION_DELAY,
   ANIMATION_EASING,
   ANIMATION_DURATION,
 } from './constants'
 
-class Map {
+import Chart from './chart'
+
+class Map extends Chart {
   constructor(selector) {
+    super(selector)
     this.svg = d3.select(selector)
-    this.setData()
     this.shadowCircle()
     this.mainCircle()
     this.innerWhiteCircle()
@@ -26,34 +16,9 @@ class Map {
     this.ranking()
   }
 
-  setData() {
-    this.data = CITIES
-
-    this.data[SAN_FRANCISCO].position = { x: 20, y: 160 }
-    this.data[SAN_FRANCISCO].ranking = 1
-    this.data[NEW_YORK].position = { x: 625, y: 135 }
-    this.data[NEW_YORK].ranking = 2
-    this.data[PORTLAND].position = { x: 45, y: 90 }
-    this.data[PORTLAND].ranking = 3
-    this.data[BOSTON].position = { x: 650, y: 100 }
-    this.data[BOSTON].ranking = 4
-    this.data[SEATTLE].position = { x: 45, y: 40 }
-    this.data[SEATTLE].ranking = 5
-    this.data[AUSTIN].position = { x: 320, y: 350 }
-    this.data[AUSTIN].ranking = 6
-    this.data[SAN_JOSE].position = { x: 35, y: 190 }
-    this.data[SAN_JOSE].ranking = 7
-    this.data[RALEIGN].position = { x: 600, y: 210 }
-    this.data[RALEIGN].ranking = 8
-    this.data[DENVER].position = { x: 250, y: 170 }
-    this.data[DENVER].ranking = 9
-    this.data[PHOENIX].position = { x: 150, y: 255 }
-    this.data[PHOENIX].ranking = 10
-  }
-
-
   shadowCircle() {
-    this.svg.selectAll('.shadow')
+    this.svg
+      .selectAll('.shadow')
       .data(Object.values(this.data))
       .enter()
       .append('circle')
@@ -69,7 +34,8 @@ class Map {
   }
 
   mainCircle() {
-    this.svg.selectAll()
+    this.svg
+      .selectAll()
       .data(Object.values(this.data))
       .enter()
       .append('circle')
@@ -86,7 +52,8 @@ class Map {
   }
 
   innerWhiteCircle() {
-    this.svg.selectAll()
+    this.svg
+      .selectAll()
       .data(Object.values(this.data))
       .enter()
       .append('circle')
@@ -103,7 +70,8 @@ class Map {
   }
 
   cityLabel() {
-    this.svg.selectAll('text')
+    this.svg
+      .selectAll('text')
       .data(Object.values(this.data))
       .enter()
       .append('text')
@@ -132,7 +100,8 @@ class Map {
   }
 
   ranking() {
-    this.svg.selectAll('.ranking')
+    this.svg
+      .selectAll('.ranking')
       .data(Object.values(this.data))
       .enter()
       .append('text')

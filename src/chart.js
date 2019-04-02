@@ -4,12 +4,14 @@ import {
   WIDTH,
   ANIMATION_DELAY,
   ANIMATION_EASING,
-  ANIMATION_DURATION
+  ANIMATION_DURATION,
+  CITIES
 } from './constants'
 
 class Chart {
   constructor(selector, options) {
     this.setChart(selector, options)
+    this.setData()
   }
 
   setChart(selector, options = { topOffset: 0, leftOffset: 0 }) {
@@ -18,6 +20,10 @@ class Chart {
       .attr('width', WIDTH + MARGINS * 2)
     this.chart = svg.append('g')
       .attr('transform', `translate(${MARGINS + options.leftOffset}, ${MARGINS / 2 + options.topOffset})`)
+  }
+
+  setData() {
+    this.data = CITIES
   }
 
   xAxis(domain, xScale, ticks = 5) {
