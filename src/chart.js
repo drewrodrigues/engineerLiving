@@ -10,7 +10,6 @@ import {
 class Chart {
   constructor(selector) {
     this.setChart(selector)
-    this.setData()
   }
 
   setChart(selector) {
@@ -19,10 +18,6 @@ class Chart {
       .attr('width', WIDTH + MARGINS * 2)
     this.chart = svg.append('g')
       .attr('transform', `translate(${MARGINS}, ${MARGINS / 2})`)
-  }
-
-  setData() {
-    this.data = CITIES
   }
 
   xAxis(domain, xScale, ticks = 5) {

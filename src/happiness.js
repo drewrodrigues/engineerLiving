@@ -23,6 +23,7 @@ class Happiness extends Chart {
   constructor(selector) {
     super(selector)
 
+    this.setData()
     this.rectangles()
     this.rectangleLabels(function(i) {
       return `#${i+1} - ${this.city} (overall ${this.rank})`

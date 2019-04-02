@@ -21,6 +21,7 @@ class SunnyDays extends Chart {
   constructor(selector) {
     super(selector)
 
+    this.setData()
     this.xAxis([120, 300], 'scaleLinear')
     this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
     this.rectangles()
