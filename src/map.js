@@ -16,7 +16,17 @@ import {
 } from './constants'
 
 class Map {
-  constructor() {
+  constructor(selector) {
+    this.svg = d3.select(selector)
+    this.setData()
+    this.shadowCircle()
+    this.mainCircle()
+    this.innerWhiteCircle()
+    this.cityLabel()
+    this.ranking()
+  }
+
+  setData() {
     this.data = CITIES
 
     this.data[SAN_FRANCISCO].position = { x: 20, y: 160 }
@@ -39,18 +49,8 @@ class Map {
     this.data[DENVER].ranking = 9
     this.data[PHOENIX].position = { x: 150, y: 255 }
     this.data[PHOENIX].ranking = 10
-
-    this.render()
   }
 
-  render() {
-    this.svg = d3.select('svg.map')
-    this.shadowCircle()
-    this.mainCircle()
-    this.innerWhiteCircle()
-    this.cityLabel()
-    this.ranking()
-  }
 
   shadowCircle() {
     this.svg.selectAll('.shadow')
@@ -86,7 +86,6 @@ class Map {
   }
 
   innerWhiteCircle() {
-    // inner white circle
     this.svg.selectAll()
       .data(Object.values(this.data))
       .enter()

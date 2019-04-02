@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new MedianHomeCost('svg.medianHomeCost')
   new Diversity('svg.diversity')
   new Happiness('svg.happiness')
-  new Map
+  new Map('svg.map')
   new JobMarket
   new Filtering
 })
