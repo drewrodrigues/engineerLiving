@@ -14,6 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   new Diversity('svg.diversity')
   new Happiness('svg.happiness')
   new Map('svg.map')
-  new JobMarket
+  new JobMarket('svg.jobMarket')
   new Filtering
 })

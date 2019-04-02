@@ -18,10 +18,13 @@ import {
   MARGINS
 } from './constants'
 
-class JobMarket {
-  constructor() {
+import Chart from './chart'
+
+class JobMarket extends Chart {
+  constructor(selector) {
+    super(selector, { topOffset: 150, leftOffset: 80 })
+
     this.setData()
-    this.setChart()
     this.render()
   }
 
@@ -41,22 +44,15 @@ class JobMarket {
     this.data[PHOENIX].jobs = 1491
   }
 
-  setChart() {
-    const svg = d3.select('svg.jobMarket')
-      .attr('height', HEIGHT + MARGINS * 2).attr('width', WIDTH + MARGINS * 2)
-    this.chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS + 70}, ${MARGINS + 100})`)
-  }
-
   render() {
-    this._setChartVariables()
-    this._addPieChart()
-    this._addCityLabel()
-    this._addCountLabel()
-    this._middleLabel()
+    this.setChartVariables()
+    this.addPieChart()
+    this.addCityLabel()
+    this.addCountLabel()
+    this.middleLabel()
   }
 
-  _setChartVariables() {
+  setChartVariables() {
     this.radius = Math.min(WIDTH, HEIGHT) / 2
 
     this.pie = d3.pie()
@@ -75,7 +71,7 @@ class JobMarket {
       .outerRadius(this.radius)
   }
 
-  _addPieChart() {
+  addPieChart() {
     this.chart
       .selectAll()
       .data(this.pie(Object.values(this.data)))
@@ -86,7 +82,7 @@ class JobMarket {
       .attr('fill', d => d.data.color)
   }
 
-  _addCityLabel() {
+  addCityLabel() {
     this.chart
       .selectAll()
       .data(this.pie(Object.values(this.data)))
@@ -106,7 +102,7 @@ class JobMarket {
         })
   }
 
-  _addCountLabel() {
+  addCountLabel() {
     this.chart
       .selectAll()
       .data(this.pie(Object.values(this.data)))
@@ -118,7 +114,7 @@ class JobMarket {
       .text(d => d.data.jobs)
   }
 
-  _middleLabel() {
+  middleLabel() {
     this.chart
       .append('text')
       .attr('text-anchor', 'middle')

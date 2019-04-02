@@ -8,16 +8,16 @@ import {
 } from './constants'
 
 class Chart {
-  constructor(selector) {
-    this.setChart(selector)
+  constructor(selector, options) {
+    this.setChart(selector, options)
   }
 
-  setChart(selector) {
+  setChart(selector, options = { topOffset: 0, leftOffset: 0 }) {
     const svg = d3.select(selector)
       .attr('height', HEIGHT + MARGINS * 2)
       .attr('width', WIDTH + MARGINS * 2)
     this.chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS / 2})`)
+      .attr('transform', `translate(${MARGINS + options.leftOffset}, ${MARGINS / 2 + options.topOffset})`)
   }
 
   xAxis(domain, xScale, ticks = 5) {
