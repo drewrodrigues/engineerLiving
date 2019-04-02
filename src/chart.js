@@ -87,7 +87,7 @@ class Chart {
       .attr('text-anchor', 'middle')
       .attr('x', WIDTH / 2)
       .attr('y', -20)
-      .text('Sunny days per year')
+      .text(text)
   }
 }
 

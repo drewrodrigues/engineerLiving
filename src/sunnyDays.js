@@ -26,7 +26,7 @@ class SunnyDays extends Chart {
     this.rectangles()
     this.gridLines(this.xScale, 'axisBottom')
     this.rectangleLabels('days')
-    this.labelTop()
+    this.labelTop('Sunny Days Per Year')
   }
 
   setData() {
