@@ -6,7 +6,7 @@ import {
 
 import Chart from './chart'
 
-class Happiness extends Chart {
+class Salary extends Chart {
   constructor(selector) {
     super(selector)
     this.sortData()
@@ -79,4 +79,4 @@ class Happiness extends Chart {
   }
 }
 
-export default Happiness
+export default Salary

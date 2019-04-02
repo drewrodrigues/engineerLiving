@@ -33,10 +33,10 @@ const SAN_JOSE_CITY = "San Jose"
 const SAN_JOSE_CLASS = "city-San-Jose"
 const SAN_JOSE_COLOR = "#9b59b6"
 
-export const RALEIGN = "RALEIGN"
-const RALEIGN_CITY = "Raleign"
-const RALEIGN_CLASS = "city-Raleign"
-const RALEIGN_COLOR = "#f39c12"
+export const RALEIGH = "RALEIGH"
+const RALEIGH_CITY = "Raleigh"
+const RALEIGH_CLASS = "city-Raleigh"
+const RALEIGH_COLOR = "#f39c12"
 
 export const DENVER = "DENVER"
 const DENVER_CITY = "Denver"
@@ -83,7 +83,7 @@ export const CITIES = {
       { ethnicity: "Hispanic", percentage: 28.8 },
       { ethnicity: "Black", percentage: 22.6 }
     ],
-    happinessRank: 110000,
+    happinessRank: 90,
     medianHomePrice: 662100,
     medianSalary: 110000,
     jobs: 8364,
@@ -186,11 +186,11 @@ export const CITIES = {
     ranking: 7,
     sunnyDays: 204
   },
-  RALEIGN: {
+  RALEIGH: {
     adjustedSalary: 90000, 
-    city: RALEIGN_CITY,
-    color: RALEIGN_COLOR,
-    class: RALEIGN_CLASS,
+    city: RALEIGH_CITY,
+    color: RALEIGH_COLOR,
+    class: RALEIGH_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 54 },
       { ethnicity: "Asian", percentage: 4.3 },
