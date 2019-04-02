@@ -33,6 +33,7 @@ class SunnyDays extends Chart {
   setData() {
     this.data = CITIES
 
+    // https://www.bestplaces.net/
     this.data[SAN_FRANCISCO].days = 256
     this.data[NEW_YORK].days = 224
     this.data[PORTLAND].days = 144
