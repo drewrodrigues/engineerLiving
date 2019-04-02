@@ -18,8 +18,26 @@ import {
   MARGINS
 } from './constants'
 
-class Happiness {
-  constructor() {
+import Chart from './chart'
+
+class Happiness extends Chart {
+  constructor(selector) {
+    super(selector)
+
+    this.setData()
+    this.xAxis([75, 125], 'scaleLinear')
+    this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
+    this.rectanglesMedianSalary()
+    this.rectanglesAdjustedSalary()
+    this.gridLines(this.xScale, 'axisBottom')
+    this.rectangleLabels(function() {
+      return `$${parseInt(this.adjusted/1000)}K`
+    })
+    this.rectangleMedianLabels()
+    this.labelTop('Adjusted Salary | Median Salary')
+  }
+
+  setData() {
     this.data = CITIES
 
     // https://www.glassdoor.com/blog/25-best-paying-cities-software-engineers/
@@ -44,116 +62,59 @@ class Happiness {
     this.data[PHOENIX].salary = 87997
     this.data[PHOENIX].adjusted = 86765
 
-    this.render()
+    this.sortedData = Object.values(this.data).sort((a, b) => a.cost - b.cost)
   }
 
-  render() {
-    const svg = d3.select('svg.salary')
-      .attr('height', HEIGHT + MARGINS * 2).attr('width', WIDTH + MARGINS * 2)
-    const chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
-    const format = d3.format('$,')
-    const orderedData = Object.values(this.data).sort((a, b) => b.adjusted - a.adjusted)
-
-    // x axis - salary
-    const xScale = d3.scaleLinear()
-      .domain([75, 125])
-      .range([0, WIDTH])
-      
-    chart.append('g')
-      .call(d3.axisBottom(xScale).ticks(5))
-      .attr('transform', `translate(0, ${HEIGHT})`)
-
-    // y axis - city
-    const yScale = d3.scaleBand()
-      .domain(orderedData.map(d => d.city))
-      .range([0, WIDTH])
-      .padding(0.1)
-
-    // city labels
-    chart.append('g')
-      .call(d3.axisLeft(yScale))
-
-    // rectangles - salary
-    chart.selectAll('.bar')
-      .data(orderedData)
+  rectanglesAdjustedSalary() {
+    this.chart
+      .selectAll()
+      .data(this.sortedData)
       .enter()
       .append('rect')
       .attr('class', d => `city ${d.class}`)
       .attr('x', 1)
-      .attr('y', d => yScale(d.city))
-      .attr('height', yScale.bandwidth())
-      .style('fill', '#bbb')
-      // animation
-      .transition()
-        .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
-        .attr('width', d => xScale(d.salary / 1000))
-
-    // rectangles - adjusted salary
-    chart.selectAll()
-      .data(orderedData)
-      .enter()
-      .append('rect')
-      .attr('class', d => `city ${d.class}`)
-      .attr('x', 1)
-      .attr('y', d => yScale(d.city))
-      .attr('height', yScale.bandwidth())
+      .attr('y', d => this.yScale(d.city))
+      .attr('height', this.yScale.bandwidth())
       .style('fill', d => d.color)
-      // animation
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-        .attr('width', d => xScale(d.adjusted / 1000))
-    
-    // adjusted text
-    chart.selectAll('.bar')
-      .data(orderedData)
+        .attr('width', d => this.xScale(d.adjusted / 1000))
+  }
+
+  rectanglesMedianSalary() {
+    this.chart
+      .selectAll()
+      .data(this.sortedData)
       .enter()
-      .append('text')
-      .text(d => format(parseInt(d.adjusted/1000)) + 'K')
-      .style('fill', '#fff')
+      .append('rect')
       .attr('class', d => `city ${d.class}`)
-      .attr('y', (d, i) => i * 19.9 + 14)
+      .attr('x', 1)
+      .attr('y', d => this.yScale(d.city))
+      .attr('height', this.yScale.bandwidth())
+      .style('fill', '#bbb')
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .attr('x', 5)
-    
-    // median salary
-    chart.selectAll('.bar')
-      .data(orderedData)
+        .attr('width', d => this.xScale(d.salary / 1000))
+  }
+
+  rectangleMedianLabels() {
+    this.chart.selectAll()
+      .data(this.sortedData)
       .enter()
       .append('text')
       .style('fill', '#aaa')
       .attr('class', d => `city ${d.class}`)
       .attr('y', (d, i) => i * 19.9 + 14)
+      .text(d => `$${parseInt(d.salary/1000)}K`)
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-      .text(d => format(parseInt(d.salary/1000)) + 'K')
-      .attr('x', d => xScale(d.salary / 1000) + 5)
-      
-    // label top
-    chart.append('text')
-      .attr('class', 'label-text')
-      .attr('x', WIDTH / 2)
-      .attr('y', -20)
-      .attr('text-anchor', 'middle')
-      .text('Adjusted Salary / Median Salary')
-
-    // grid lines
-    chart.append('g')
-      .attr('class', 'grid')
-      .call(d3.axisTop()
-      .scale(xScale)
-      .tickSize(-WIDTH, 0, 0)
-      .tickFormat('')
-      .ticks(5))
+        .attr('x', d => this.xScale(d.salary / 1000) + 5)
   }
 }
 

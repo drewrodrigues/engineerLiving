@@ -9,7 +9,7 @@ import Filtering from './filtering'
 
 document.addEventListener("DOMContentLoaded", () => {
   new SunnyDays('svg.sunnyDays')
-  new Salary
+  new Salary('svg.salary')
   new MedianHomeCost('svg.medianHomeCost')
   new Diversity
   new Happiness('svg.happiness')
