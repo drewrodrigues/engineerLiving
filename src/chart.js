@@ -31,15 +31,14 @@ class Chart {
       .attr('transform', `translate(0, ${HEIGHT})`)
   }
 
-  yAxis(domain, yScale) {
+  yAxis(domain, yScale, ticks = 5) {
     this.yScale = d3[yScale]()
       .domain(domain)
       .range([0, WIDTH])
-      .padding(0.1)
 
     this.chart
       .append('g')
-      .call(d3.axisLeft(this.yScale))
+      .call(d3.axisLeft(this.yScale).ticks(ticks))
   }
 
   gridLines(scale, position, ticks = 5) {

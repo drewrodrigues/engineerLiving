@@ -18,8 +18,23 @@ import {
   MARGINS
 } from './constants'
 
-class Diversity {
-  constructor() {
+import Chart from './chart'
+
+class Diversity extends Chart {
+  constructor(selector) {
+    super(selector)
+    this.setData()
+    this.xAxis(this.ethnicities, 'scaleBand')
+    this.yAxis([70, 0], 'scaleLinear')
+    this.lines()
+    this.percentageLabels()
+    this.labelLeft()
+    this.labelTop('Diversity')
+    this.gridLines(this.xScale, 'axisBottom')
+    this.gridLines(this.yScale, 'axisRight')
+  }
+  
+  setData() {
     this.ethnicities = ["White", "Asian", "Hispanic", "Black"]
     this.data = CITIES
     this.data[SAN_FRANCISCO].values = [
@@ -82,40 +97,15 @@ class Diversity {
       { ethnicity: "Hispanic", percentage: 40.5 },
       { ethnicity: "Black", percentage: 6.5 }
     ]
-
-    this.render()
   }
 
-  render() {
-    const svg = d3.select('svg.diversity')
-      .attr("height", HEIGHT + MARGINS * 2 - 90).attr("width", WIDTH + MARGINS * 2)
-    const chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS/2})`)
-
-    // x axis
-    const xScale = d3.scaleBand()
-      .domain(this.ethnicities)
-      .range([0, WIDTH])
-
-    chart.append('g')
-      .call(d3.axisBottom(xScale).tickSizeOuter(0))
-      .attr("transform", `translate(0, ${HEIGHT})`)
-
-    // y axis
-    const yScale = d3.scaleLinear()
-      .domain([70, 0])
-      .range([0, HEIGHT])
-
-    chart.append('g')
-      .call(d3.axisLeft(yScale).ticks(5))
-
-    // data
+  lines() {
     let line = d3.line()
-      .x(d => xScale(d.ethnicity))
-      .y(d => yScale(d.percentage))
+      .x(d => this.xScale(d.ethnicity))
+      .y(d => this.yScale(d.percentage))
     
-    // add lines
-    chart.selectAll('.line')
+    this.chart
+      .selectAll('.line')
       .data(Object.values(this.data))
       .enter()
       .append('path')
@@ -125,9 +115,11 @@ class Diversity {
       .style('stroke', d => d.color)
       .style('stroke-width', 2)
       .style('stroke-linecap', 'round')
-    
-    // percentage text
-    chart.selectAll()
+  }
+
+  percentageLabels() {
+    this.chart
+      .selectAll()
       .data(() => Object.values(this.data))
       .enter()
       .append('g')
@@ -137,38 +129,19 @@ class Diversity {
       .enter()
       .append('text')
       .text(d => `${parseInt(d.percentage)}%`)
-      .transition()
-        .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
       .attr('x', (d, i) => (WIDTH / 4) * i + 20)
       .attr('y', d => HEIGHT - HEIGHT * (d.percentage / 70))
+  }
 
-    // left label
-    chart.append('text')
+  labelLeft() {
+    this.chart
+      .append('text')
       .attr('class', 'label-text')
       .attr('x', -WIDTH/2)
       .attr('y', -50)
       .attr("transform", "rotate(-90)")
       .attr('text-anchor', 'middle')
       .text('% of population')
-
-    // top label
-    chart.append('text')
-      .attr('class', 'label-text')
-      .attr('x', WIDTH / 2)
-      .attr('y', -20)
-      .attr('text-anchor', 'middle')
-      .text('Diversity')
-
-    // grid lines
-    chart.append('g')
-      .attr('class', 'grid')
-      .call(d3.axisRight()
-      .scale(yScale)
-      .tickSize(WIDTH, 0, 0)
-      .tickFormat('')
-      .ticks(5))
   }
 }
 

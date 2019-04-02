@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new SunnyDays('svg.sunnyDays')
   new Salary('svg.salary')
   new MedianHomeCost('svg.medianHomeCost')
-  new Diversity
+  new Diversity('svg.diversity')
   new Happiness('svg.happiness')
   new Map
   new JobMarket
