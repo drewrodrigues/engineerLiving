@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new Salary
   new MedianHomeCost
   new Diversity
-  new Happiness
+  new Happiness('svg.happiness')
   new Map
   new JobMarket
   new Filtering

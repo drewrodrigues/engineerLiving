@@ -14,15 +14,20 @@ import {
   ANIMATION_EASING,
   ANIMATION_DURATION,
   WIDTH,
-  HEIGHT,
-  MARGINS
+  HEIGHT
 } from './constants'
 
-class Happiness {
-  constructor() {
-    this.setData()
-    this.setChart()
-    this.render()
+import Chart from './chart'
+
+class Happiness extends Chart {
+  constructor(selector) {
+    super(selector)
+
+    this.rectangles()
+    this.rectangleLabels(function(i) {
+      return `#${i+1} - ${this.city} (overall ${this.rank})`
+    })
+    this.labelTop('Happiness Ranking')
   }
 
   setData() {
@@ -43,21 +48,7 @@ class Happiness {
     this.sortedData = Object.values(this.data).sort((a, b) => a.rank - b.rank)
   }
 
-  setChart() {
-    const svg = d3.select('svg.happiness')
-      .attr('height', HEIGHT + MARGINS * 2 - 90)
-      .attr('width', WIDTH + MARGINS * 2 + 100)
-    this.chart = svg.append('g')
-      .attr('transform', `translate(${MARGINS}, ${MARGINS})`)
-  }
-
-  render() {
-    this._createRectangles()
-    this._addText()
-    this._addTopLabel()
-  }
-
-  _createRectangles() {
+  rectangles() {
     this.chart
       .selectAll()
       .data(this.sortedData)
@@ -72,29 +63,6 @@ class Happiness {
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
         .attr('width', WIDTH)
-  }
-
-  _addText() {
-    this.chart
-      .selectAll()
-      .data(this.sortedData)
-      .enter()
-      .append('text')
-      .attr('class', d => `city ${d.class}`)
-      .attr('x', 10)
-      .attr('y', (d, i) => 20 * i + 14)
-      .style('fill', '#fff')
-      .text((d, i) => `${i+1} - ${d.city} (Overall ${d.rank})`)
-  }
-
-  _addTopLabel() {
-    this.chart
-      .append('text')
-      .attr('class', 'label-text')
-      .attr('text-anchor', 'middle')
-      .attr('x', WIDTH / 2)
-      .attr('y', -20)
-      .text('Happiness Ranking')
   }
 }
 
