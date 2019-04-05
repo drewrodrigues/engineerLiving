@@ -58,6 +58,7 @@ class JobMarket extends Chart {
       .data(this.pie(Object.values(this.data)))
       .enter()
       .append('text')
+      .attr('class', d => `city ${d.data.class}`)
       .attr('text-anchor', 'middle')
       .attr('transform',  d => `translate(${this.labelArc.centroid(d)})`)
       .text(d => d.data.city)
