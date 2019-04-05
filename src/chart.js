@@ -63,8 +63,8 @@ class Chart {
       .data(this.sortedData)
       .enter()
       .append('text')
-      .attr('class', d => `city ${d.class}`)
-      .attr('y', (d, i) => i * 19.9 + 14)
+      .attr('class', d => `city ${d.class} bar-label`)
+      .attr('y', (d, i) => i * 20.1 + 14)
       .style('fill', '#fff')
       .text((d, i) => {
         if (typeof text === 'string') {

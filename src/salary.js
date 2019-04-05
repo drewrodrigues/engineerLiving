@@ -19,7 +19,7 @@ class Salary extends Chart {
       return `$${parseInt(this.adjustedSalary/1000)}K`
     })
     this.rectangleMedianLabels()
-    this.labelTop('Adjusted Salary | Median Salary')
+    this.labelTop('Adjusted & Median Salary')
   }
 
   sortData() {
@@ -32,7 +32,7 @@ class Salary extends Chart {
       .data(this.sortedData)
       .enter()
       .append('rect')
-      .attr('class', d => `city ${d.class}`)
+      .attr('class', d => `city ${d.class} bar-label`)
       .attr('x', 1)
       .attr('y', d => this.yScale(d.city))
       .attr('height', this.yScale.bandwidth())
@@ -68,7 +68,7 @@ class Salary extends Chart {
       .enter()
       .append('text')
       .style('fill', '#aaa')
-      .attr('class', d => `city ${d.class}`)
+      .attr('class', d => `city ${d.class} median-salary`)
       .attr('y', (d, i) => i * 19.9 + 14)
       .text(d => `$${parseInt(d.medianSalary/1000)}K`)
       .transition()

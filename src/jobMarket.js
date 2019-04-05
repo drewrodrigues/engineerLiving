@@ -19,7 +19,7 @@ class JobMarket extends Chart {
     this.addPieChart()
     this.addCityLabel()
     this.addCountLabel()
-    this.middleLabel()
+    this.topLabel()
   }
 
   setChartVariables() {
@@ -34,7 +34,7 @@ class JobMarket extends Chart {
 
     this.labelArc = d3.arc()
       .innerRadius(this.radius)
-      .outerRadius(this.radius + 110)
+      .outerRadius(this.radius + 70)
 
     this.percentageArc = d3.arc()
       .innerRadius(this.radius / 2)
@@ -58,7 +58,6 @@ class JobMarket extends Chart {
       .data(this.pie(Object.values(this.data)))
       .enter()
       .append('text')
-      .attr('class', d => `city ${d.data.class}`)
       .attr('text-anchor', 'middle')
       .attr('transform',  d => `translate(${this.labelArc.centroid(d)})`)
       .text(d => d.data.city)
@@ -84,11 +83,13 @@ class JobMarket extends Chart {
       .text(d => d.data.jobs)
   }
 
-  middleLabel() {
+  topLabel() {
     this.chart
       .append('text')
       .attr('text-anchor', 'middle')
+      .attr('class', 'label-text')
       .text('Open Jobs')
+      .attr('y', -175)
   }
 }
 
