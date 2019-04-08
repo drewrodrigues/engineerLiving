@@ -52,11 +52,16 @@ const PHOENIX_COLOR = "#c0392b"
 // jobs: indeed search - software engineer w/ exact location only 3/24/2019
 // salary: https://www.glassdoor.com/blog/25-best-paying-cities-software-engineers/
 
+const calculateRanking = cities => {
+  return 0
+}
+
 export const CITIES = {
   SAN_FRANCISCO: {
     adjustedSalary: 99751,
     city: SAN_FRANCISCO_CITY,
     color: SAN_FRANCISCO_COLOR,
+    constant: SAN_FRANCISCO,
     class: SAN_FRANCISCO_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 41.4 },
@@ -69,13 +74,14 @@ export const CITIES = {
     medianSalary: 120000,
     jobs: 7947,
     position: { x: 20, y: 160 },
-    ranking: 1,
-    sunnyDays: 256
+    sunnyDays: 256,
+    points: 0
   },
   NEW_YORK: {
     adjustedSalary: 100000, 
     city: NEW_YORK_CITY,
     color: NEW_YORK_COLOR,
+    constant: NEW_YORK,
     class: NEW_YORK_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 32.7 },
@@ -88,13 +94,14 @@ export const CITIES = {
     medianSalary: 110000,
     jobs: 8364,
     position: { x: 625, y: 135 },
-    ranking: 2,
-    sunnyDays: 224
+    sunnyDays: 224,
+    points: 0
   },
   BOSTON: {
     adjustedSalary: 90171, 
     city: BOSTON_CITY,
     color: BOSTON_COLOR,
+    constant: BOSTON,
     class: BOSTON_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 46 },
@@ -107,13 +114,14 @@ export const CITIES = {
     medianSalary: 100000,
     jobs: 3630,
     position: { x: 650, y: 100 },
-    ranking: 3,
-    sunnyDays: 200
+    sunnyDays: 200,
+    points: 0
   },
   PORTLAND: {
     adjustedSalary: 89374, 
     city: PORTLAND_CITY,
     color: PORTLAND_COLOR,
+    constant: PORTLAND,
     class: PORTLAND_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 71.8 },
@@ -126,13 +134,14 @@ export const CITIES = {
     medianSalary: 90000,
     jobs: 2359,
     position: { x: 45, y: 90 },
-    ranking: 3,
-    sunnyDays: 144
+    sunnyDays: 144,
+    points: 0
   },
   SEATTLE: {
     adjustedSalary: 105735, 
     city: SEATTLE_CITY,
     color: SEATTLE_COLOR,
+    constant: SEATTLE,
     class: SEATTLE_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 66.2 },
@@ -145,13 +154,14 @@ export const CITIES = {
     medianSalary: 113242,
     jobs: 10417,
     position: { x: 45, y: 40 },
-    ranking: 5,
-    sunnyDays: 152
+    sunnyDays: 152,
+    points: 0
   },
   AUSTIN: {
     adjustedSalary: 90171, 
     city: AUSTIN_CITY,
     color: AUSTIN_COLOR,
+    constant: AUSTIN,
     class: AUSTIN_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 48.7 },
@@ -164,13 +174,14 @@ export const CITIES = {
     medianSalary: 100000,
     jobs: 4308,
     position: { x: 320, y: 350 },
-    ranking: 6,
-    sunnyDays: 228
+    sunnyDays: 228,
+    points: 0
   },
   SAN_JOSE: {
     adjustedSalary: 100989, 
     city: SAN_JOSE_CITY,
     color: SAN_JOSE_COLOR,
+    constant: SAN_JOSE,
     class: SAN_JOSE_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 27.5 },
@@ -183,13 +194,14 @@ export const CITIES = {
     medianSalary: 122500,
     jobs: 3023,
     position: { x: 35, y: 190 },
-    ranking: 7,
-    sunnyDays: 204
+    sunnyDays: 204,
+    points: 0
   },
   RALEIGH: {
     adjustedSalary: 90000, 
     city: RALEIGH_CITY,
     color: RALEIGH_COLOR,
+    constant: RALEIGH,
     class: RALEIGH_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 54 },
@@ -202,13 +214,14 @@ export const CITIES = {
     medianSalary: 94142,
     jobs: 1377,
     position: { x: 600, y: 210 },
-    ranking: 8,
-    sunnyDays: 213
+    sunnyDays: 213,
+    points: 0
   },
   DENVER: {
     adjustedSalary: 85878, 
     city: DENVER_CITY,
     color: DENVER_COLOR,
+    constant: DENVER,
     class: DENVER_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 52.9 },
@@ -221,13 +234,14 @@ export const CITIES = {
     medianSalary: 90000,
     jobs: 1973,
     position: { x: 250, y: 170 },
-    ranking: 9,
-    sunnyDays: 245
+    sunnyDays: 245,
+    points: 0
   },
   PHOENIX: {
     adjustedSalary: 86765, 
     city: PHOENIX_CITY,
     color: PHOENIX_COLOR,
+    constant: PHOENIX,
     class: PHOENIX_CLASS,
     diversity: [
       { ethnicity: "White", percentage: 46 },
@@ -240,10 +254,64 @@ export const CITIES = {
     medianSalary: 87997,
     jobs: 1491,
     position: { x: 150, y: 255 },
-    ranking: 10,
-    sunnyDays: 299
+    sunnyDays: 299,
+    points: 0
   }
 }
+
+const calculatePointsForSalary = () => {
+  calculateBy((a, b) => b.adjustedSalary - a.adjustedSalary)
+}
+
+const calculatePointsForHappiness = () => {
+  calculateBy((a, b) => a.happinessRank - b.happinessRank)
+}
+
+const calculatePointsForMedianHomePrice = () => {
+  calculateBy((a, b) => a.medianHomePrice - b.medianHomePrice)
+}
+
+const calculatePointsForSunnyDays = () => {
+  calculateBy((a, b) => b.sunnyDays - a.sunnyDays)
+}
+
+const calculatePointsForDiversity = () => {
+  calculateBy((a, b) => {
+    let aDiversityPoints = 0
+    let bDiversityPoints = 0
+    a.diversity.forEach(ethnicity => {
+      if (ethnicity.percentage > 10) aDiversityPoints += 1
+    })
+    b.diversity.forEach(ethnicity => {
+      if (ethnicity.percentage > 10) bDiversityPoints += 1
+    })
+    return b.bDiversityPoints - a.aDiversityPoints
+  })
+}
+
+const calculatePointsForJobs = () => {
+  calculateBy((a, b) => b.jobs - a.jobs)
+}
+
+const setRankings = () => {
+  let citiesSortedByPoints = Object.values(CITIES).sort((a, b) => a.points - b.points)
+  citiesSortedByPoints.forEach((city, i) => {
+    CITIES[city.constant].ranking = i + 1
+  })
+}
+
+const calculateBy = sortingCallback => {
+  let sortedCities = Object.values(CITIES).sort(sortingCallback)
+  sortedCities.forEach((city, i) => CITIES[city.constant].points += i)
+}
+
+calculatePointsForSalary()
+calculatePointsForHappiness()
+calculatePointsForMedianHomePrice()
+calculatePointsForSunnyDays()
+calculatePointsForDiversity()
+calculatePointsForJobs()
+setRankings()
 
 export const ANIMATION_DURATION = 1000
 export const ANIMATION_DELAY = 0
