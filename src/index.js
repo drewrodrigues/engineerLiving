@@ -6,8 +6,10 @@ import Map from './map'
 import JobMarket from './jobMarket'
 import Salary from './salary'
 import Filtering from './filtering'
+import RankingCalculation from './rankingCalculation'
 
 document.addEventListener("DOMContentLoaded", () => {
+  new RankingCalculation()
   new SunnyDays('svg.sunnyDays')
   new Salary('svg.salary')
   new MedianHomeCost('svg.medianHomeCost')

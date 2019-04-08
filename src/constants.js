@@ -259,60 +259,6 @@ export const CITIES = {
   }
 }
 
-const calculatePointsForSalary = () => {
-  calculateBy((a, b) => b.adjustedSalary - a.adjustedSalary)
-}
-
-const calculatePointsForHappiness = () => {
-  calculateBy((a, b) => a.happinessRank - b.happinessRank)
-}
-
-const calculatePointsForMedianHomePrice = () => {
-  calculateBy((a, b) => a.medianHomePrice - b.medianHomePrice)
-}
-
-const calculatePointsForSunnyDays = () => {
-  calculateBy((a, b) => b.sunnyDays - a.sunnyDays)
-}
-
-const calculatePointsForDiversity = () => {
-  calculateBy((a, b) => {
-    let aDiversityPoints = 0
-    let bDiversityPoints = 0
-    a.diversity.forEach(ethnicity => {
-      if (ethnicity.percentage > 10) aDiversityPoints += 1
-    })
-    b.diversity.forEach(ethnicity => {
-      if (ethnicity.percentage > 10) bDiversityPoints += 1
-    })
-    return b.bDiversityPoints - a.aDiversityPoints
-  })
-}
-
-const calculatePointsForJobs = () => {
-  calculateBy((a, b) => b.jobs - a.jobs)
-}
-
-const setRankings = () => {
-  let citiesSortedByPoints = Object.values(CITIES).sort((a, b) => a.points - b.points)
-  citiesSortedByPoints.forEach((city, i) => {
-    CITIES[city.constant].ranking = i + 1
-  })
-}
-
-const calculateBy = sortingCallback => {
-  let sortedCities = Object.values(CITIES).sort(sortingCallback)
-  sortedCities.forEach((city, i) => CITIES[city.constant].points += i)
-}
-
-calculatePointsForSalary()
-calculatePointsForHappiness()
-calculatePointsForMedianHomePrice()
-calculatePointsForSunnyDays()
-calculatePointsForDiversity()
-calculatePointsForJobs()
-setRankings()
-
 export const ANIMATION_DURATION = 1000
 export const ANIMATION_DELAY = 0
 export const ANIMATION_EASING = d3.easePoly
