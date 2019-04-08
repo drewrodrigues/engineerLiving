@@ -75,6 +75,10 @@ svg {
   z-index: 100;
 }
 
+svg:not(.jobMarket) {
+  height: 300px;
+}
+
 .container {
   width: 1400px;
   margin: 0 auto;
@@ -193,4 +197,13 @@ text.city {
 
 .city-data-toggle.show {
   opacity: 1
+}
+
+footer {
+  text-align: center;
+}
+
+footer li {
+  display: inline-block;
+  margin-bottom: 10px;
 }
