@@ -12,15 +12,15 @@ class RankingCalculation {
   }
 
   calculatePointsForSalary() {
-    this.calculateBy((a, b) => b.adjustedSalary - a.adjustedSalary)
+    this.calculateBy((a, b) => b.adjustedSalary - a.adjustedSalary, 3)
   }
   
   calculatePointsForHappiness() {
-    this.calculateBy((a, b) => a.happinessRank - b.happinessRank)
+    this.calculateBy((a, b) => a.happinessRank - b.happinessRank, 1.5)
   }
   
   calculatePointsForMedianHomePrice() {
-    this.calculateBy((a, b) => a.medianHomePrice - b.medianHomePrice)
+    this.calculateBy((a, b) => a.medianHomePrice - b.medianHomePrice, 3)
   }
   
   calculatePointsForSunnyDays() {
@@ -42,7 +42,7 @@ class RankingCalculation {
   }
   
   calculatePointsForJobs() {
-    this.calculateBy((a, b) => b.jobs - a.jobs)
+    this.calculateBy((a, b) => b.jobs - a.jobs, 2)
   }
   
   setRankings() {
@@ -52,9 +52,10 @@ class RankingCalculation {
     })
   }
   
-  calculateBy(sortingCallback) {
+  calculateBy(sortingCallback, multiplier = 1) {
     let sortedCities = Object.values(CITIES).sort(sortingCallback)
-    sortedCities.forEach((city, i) => CITIES[city.constant].points += i)
+    console.log(multiplier)
+    sortedCities.forEach((city, i) => CITIES[city.constant].points += (i * multiplier))
   }
 }
 
