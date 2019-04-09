@@ -54,7 +54,6 @@ class RankingCalculation {
   
   calculateBy(sortingCallback, multiplier = 1) {
     let sortedCities = Object.values(CITIES).sort(sortingCallback)
-    console.log(multiplier)
     sortedCities.forEach((city, i) => CITIES[city.constant].points += (i * multiplier))
   }
 }
