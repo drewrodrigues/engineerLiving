@@ -64,7 +64,7 @@ class Filtering {
         title.style('color', color)
       })
       .on('mouseout', d => {
-        title.style('color', '#777')
+        title.style('color', 'white')
       })
   }
 }

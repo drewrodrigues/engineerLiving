@@ -127,15 +127,13 @@ svg:not(.jobMarket) {
 }
 
 .label-text {
-  font-family: 'EB Garamond', serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
-  fill: #777;
+  fill: white;
 }
 
 text {
   fill: #777;
-  font-weight: 700;
   font-size: 12px;
 }
 
@@ -168,7 +166,7 @@ text {
 h1 {
   font-family: 'EB Garamond', serif;
   font-size: 32px;
-  color: #777;
+  color: white;
   font-weight: 700;
   transition: 0.5s color;
   text-align: center;
@@ -177,8 +175,8 @@ h1 {
 
 h2 {
   text-align: center;
-  font-size: 16px;
-  color: #ccc;
+  font-size: 14px;
+  color: #777;
 }
 
 .city {

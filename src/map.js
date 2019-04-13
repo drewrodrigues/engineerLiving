@@ -80,7 +80,7 @@ class Map extends Chart {
       .text(d => d.city)
       .style('font-size', 14)
       .style('stroke-width', 3)
-      .attr('fill', d => d.color)
+      .style('fill', d => d.color)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION / 1.5)
