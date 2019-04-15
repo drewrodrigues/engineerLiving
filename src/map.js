@@ -90,7 +90,7 @@ class Map extends Chart {
           return d.position.x - 90
         } else if (d.city === "Boston") {
           return d.position.x - 75
-        } else if (d.city === "Raleign") {
+        } else if (d.city === "Raleigh") {
           return d.position.x - 80
         }
         return d.position.x + 25
