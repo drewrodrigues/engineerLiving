@@ -10,12 +10,13 @@ class MedianHomeCost extends Chart {
   constructor(selector) {
     super(selector)
     this.sortData()
-    this.xAxis([0, 1350], 'scaleLinear')
+    this.xAxis([0, 1350000], 'scaleLinear', 2, () => d3.format("$" + "~s"))
     this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
     this.rectangles()
     this.gridLines(this.xScale, 'axisBottom')
     this.rectangleLabels(function() {
-      return `$${parseInt(this.medianHomePrice/1000)}K`
+      const format = d3.format("$" + ".2~s")
+      return format(this.medianHomePrice)
     })
     this.labelTop('Median Home Price')
   }
@@ -39,7 +40,7 @@ class MedianHomeCost extends Chart {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-        .attr('width', d => this.xScale(d.medianHomePrice) / 1000)
+        .attr('width', d => this.xScale(d.medianHomePrice))
   }
 }
 
