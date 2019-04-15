@@ -26,14 +26,18 @@ class Chart {
     this.data = CITIES
   }
 
-  xAxis(domain, xScale, ticks = 5) {
+  xAxis(domain, xScale, ticks = 5, tickFormat = () => {}) {
     this.xScale = d3[xScale]()
       .domain(domain)
       .range([0, WIDTH])
       
     this.chart
       .append('g')
-      .call(d3.axisBottom(this.xScale).ticks(ticks))
+      .call(
+        d3.axisBottom(this.xScale)
+          .ticks(ticks)
+          .tickFormat(tickFormat())
+      )
       .attr('transform', `translate(0, ${HEIGHT})`)
   }
 
