@@ -54,7 +54,7 @@ class Salary extends Chart {
       .attr('x', 1)
       .attr('y', d => this.yScale(d.city))
       .attr('height', this.yScale.bandwidth())
-      .style('fill', '#bbb')
+      .style('fill', '#111')
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
