@@ -67,7 +67,7 @@ class Chart {
       .data(this.sortedData)
       .enter()
       .append('text')
-      .attr('class', d => `city ${d.class} bar-label`)
+      .attr('class', d => `city ${d.class} bar-label city-data-toggle`)
       .attr('y', (d, i) => i * 20.1 + 14)
       .style('fill', '#fff')
       .text((d, i) => {
@@ -77,11 +77,8 @@ class Chart {
           return text.call(d, i)
         }
       })
-      .transition()
-        .ease(ANIMATION_EASING)
-        .delay((d, i) => i * ANIMATION_DELAY)
-        .duration(ANIMATION_DURATION)
-        .attr('x', 5)
+      .attr('x', 5)
+      .style('opacity', 0)
   }
 
   labelTop(text) {

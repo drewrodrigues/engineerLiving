@@ -68,7 +68,7 @@ class Salary extends Chart {
       .enter()
       .append('text')
       .style('fill', '#aaa')
-      .attr('class', d => `city ${d.class} median-salary`)
+      .attr('class', d => `city ${d.class} median-salary city-data-toggle`)
       .attr('y', (d, i) => i * 19.9 + 14)
       .text(d => `$${parseInt(d.medianSalary/1000)}K`)
       .transition()
