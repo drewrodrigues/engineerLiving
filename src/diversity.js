@@ -1,6 +1,9 @@
 import {
   WIDTH,
   HEIGHT,
+  ANIMATION_DELAY,
+  ANIMATION_DURATION,
+  ANIMATION_EASING
 } from './constants'
 
 import Chart from './chart'
@@ -10,8 +13,8 @@ class Diversity extends Chart {
     super(selector)
     this.ethnicities = ["White", "Asian", "Hispanic", "Black"]
     this.xAxis(this.ethnicities, 'scaleBand')
-    this.yAxis([70, 0], 'scaleLinear')
-    this.lines()
+    this.yAxis([100, 0], 'scaleLinear')
+    this.circles()
     this.percentageLabels()
     this.labelLeft()
     this.labelTop('Diversity')
@@ -37,6 +40,27 @@ class Diversity extends Chart {
       .style('stroke-linecap', 'round')
   }
 
+  circles() {
+    this.chart
+      .selectAll()
+      .data(Object.values(this.data))
+      .enter()
+      .append('g')
+      .attr('class', d => `city ${d.class}`)
+      .attr('fill', d => d.color)
+      .selectAll()
+      .data(d => d.diversity)
+      .enter()
+      .append('circle')
+      .attr('cx', d => this.xScale(d.ethnicity) + 25)
+      .transition()
+        .delay((d, i) => i * ANIMATION_DELAY)
+        .duration(ANIMATION_DURATION)
+        .ease(ANIMATION_EASING)
+        .attr('r', 10)
+        .attr('cy', d => this.yScale(d.percentage))
+  }
+
   percentageLabels() {
     this.chart
       .selectAll()
@@ -48,9 +72,11 @@ class Diversity extends Chart {
       .data(d => d.diversity)
       .enter()
       .append('text')
+      .attr('text-anchor', 'middle')
       .text(d => `${parseInt(d.percentage)}%`)
-      .attr('x', (d, i) => (WIDTH / 4) * i + 20)
-      .attr('y', d => HEIGHT - HEIGHT * (d.percentage / 70))
+      .attr('x', d => this.xScale(d.ethnicity) + 25)
+      .attr('y', d => this.yScale(d.percentage) + 5)
+      .style('fill', 'white')
   }
 
   labelLeft() {

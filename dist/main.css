@@ -194,7 +194,7 @@ text.city {
 }
 
 .city-data-toggle.show {
-  opacity: 1
+  opacity: 1 !important;
 }
 
 footer {
