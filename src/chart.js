@@ -79,7 +79,8 @@ class Chart {
       .enter()
       .append('text')
       .attr('class', d => `city ${d.class} bar-label city-data-toggle`)
-      .attr('y', (d, i) => i * 20.1 + 14)
+      .attr('x', 5)
+      .attr('y', d => this.yScale(d.city) - 2)
       .style('fill', '#fff')
       .text((d, i) => {
         if (typeof text === 'string') {
@@ -88,7 +89,6 @@ class Chart {
           return text.call(d, i)
         }
       })
-      .attr('x', 5)
       .style('opacity', 0)
   }
 
