@@ -55,7 +55,11 @@ class Chart {
 
     this.chart
       .append('g')
-      .call(d3.axisLeft(this.yScale).ticks(ticks))
+      .call(
+        d3.axisLeft(this.yScale)
+          .ticks(ticks)
+          .tickFormat(tickFormat())
+      )
   }
 
   gridLines(scale, position, ticks = 5) {
