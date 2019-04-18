@@ -9,64 +9,28 @@ class Map extends Chart {
   constructor(selector) {
     super(selector)
     this.svg = d3.select(selector)
-    this.shadowCircle()
-    this.mainCircle()
-    this.innerWhiteCircle()
+    this.circle()
     this.cityLabel()
     this.ranking()
+    this.pointer()
   }
 
-  shadowCircle() {
-    this.svg
-      .selectAll('.shadow')
-      .data(Object.values(this.data))
-      .enter()
-      .append('circle')
-      .attr('r', 15)
-      .attr('width', 10)
-      .style('fill', d => "rgba(0,0,0,0.3)")
-      .attr('class', d => `city ${d.class} city-pinpoint`)
-      .transition()
-        .ease(ANIMATION_EASING)
-        .duration(ANIMATION_DURATION)
-      .attr('cy', d => d.position.y + 5)
-      .attr('cx', d => d.position.x)
-  }
-
-  mainCircle() {
-    this.svg
-      .selectAll()
-      .data(Object.values(this.data))
-      .enter()
-      .append('circle')
-      .attr('r', 15)
-      .style('fill', 'none')
-      .style('cursor', 'pointer')
-      .attr('class', d => `city ${d.class} city-pinpoint`)
-      .transition()
-        .ease(ANIMATION_EASING)
-        .duration(ANIMATION_DURATION)
-        .style('fill', d => d.color)
-        .attr('cy', d => d.position.y)
-        .attr('cx', d => d.position.x)
-  }
-
-  innerWhiteCircle() {
+  circle() {
     this.svg
       .selectAll()
       .data(Object.values(this.data))
       .enter()
       .append('circle')
       .attr('r', 10)
-      .style('fill', d => "#fff")
+      .style('fill', d => d.color)
       .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
-      .attr('cy', d => d.position.y)
-      .attr('cx', d => d.position.x)
-      .style('z-index', 10)
-      .style('cursor', 'pointer')
+        .attr('cy', d => d.position.y)
+        .attr('cx', d => d.position.x)
+        .style('z-index', 10)
+        .style('cursor', 'pointer')
   }
 
   cityLabel() {
@@ -106,15 +70,19 @@ class Map extends Chart {
       .enter()
       .append('text')
       .text(d => d.ranking)
-      .style('fill', d => d.color)
-      .style('font-size', 16)
+      .style('fill', 'white')
+      .style('font-size', 12)
+      .style('font-weight', 700)
       .attr('class', d => `city ${d.class} city-pinpoint`)
       .transition()
         .ease(ANIMATION_EASING)
         .duration(ANIMATION_DURATION)
-      .attr('y', d => d.position.y + 6)
-      .attr('x', d => d.position.x)
-      .style('text-anchor', 'middle')
+        .attr('y', d => d.position.y + 4)
+        .attr('x', d => d.position.x)
+        .style('text-anchor', 'middle')
+  }
+
+  pointer() {
   }
 }
 
