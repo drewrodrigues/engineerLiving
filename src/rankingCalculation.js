@@ -3,7 +3,7 @@ import { CITIES } from './constants'
 class RankingCalculation {
   constructor() {
     this.calculatePointsForSalary()
-    this.calculatePointsForHappiness()
+    // this.calculatePointsForHappiness()
     this.calculatePointsForMedianHomePrice()
     this.calculatePointsForSunnyDays()
     this.calculatePointsForDiversity()

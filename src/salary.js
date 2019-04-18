@@ -10,13 +10,19 @@ class Salary extends Chart {
   constructor(selector) {
     super(selector)
     this.sortData()
-    this.xAxis([75, 125], 'scaleLinear')
+    this.xAxis(
+      [75000, 125000], 
+      'scaleLinear',
+      5,
+      () => d3.format("$" + "~s")
+    )
     this.yAxis(this.sortedData.map(d => d.city), 'scaleBand')
     this.rectanglesMedianSalary()
     this.rectanglesAdjustedSalary()
     this.gridLines(this.xScale, 'axisBottom')
     this.rectangleLabels(function() {
-      return `$${parseInt(this.adjustedSalary/1000)}K`
+      const format = d3.format("$" + ".3~s")
+      return format(this.adjustedSalary)
     })
     this.rectangleMedianLabels()
     this.labelTop('Adjusted & Median Salary')
@@ -41,7 +47,7 @@ class Salary extends Chart {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-        .attr('width', d => this.xScale(d.adjustedSalary / 1000))
+        .attr('width', d => this.xScale(d.adjustedSalary))
   }
 
   rectanglesMedianSalary() {
@@ -59,7 +65,7 @@ class Salary extends Chart {
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-        .attr('width', d => this.xScale(d.medianSalary / 1000))
+        .attr('width', d => this.xScale(d.medianSalary))
   }
 
   rectangleMedianLabels() {
@@ -67,15 +73,15 @@ class Salary extends Chart {
       .data(this.sortedData)
       .enter()
       .append('text')
-      .style('fill', '#aaa')
+      .style('fill', '#000')
       .attr('class', d => `city ${d.class} median-salary city-data-toggle`)
-      .attr('y', (d, i) => i * 19.9 + 14)
-      .text(d => `$${parseInt(d.medianSalary/1000)}K`)
+      .attr('y', (d, i) => this.yScale(d.city) + 5)
+      .text(d => d3.format("$" + ".3~s")(d.medianSalary))
       .transition()
         .ease(ANIMATION_EASING)
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
-        .attr('x', d => this.xScale(d.medianSalary/1000) + 5)
+        .attr('x', d => this.xScale(d.medianSalary) + 5)
   }
 }
 
