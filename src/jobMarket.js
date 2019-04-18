@@ -10,7 +10,7 @@ import Chart from './chart'
 
 class JobMarket extends Chart {
   constructor(selector) {
-    super(selector, { topOffset: 150, leftOffset: 80 })
+    super(selector, { topOffset: 155, leftOffset: 80 })
     this.render()
   }
 
@@ -23,21 +23,21 @@ class JobMarket extends Chart {
   }
 
   setChartVariables() {
-    this.radius = Math.min(WIDTH, HEIGHT) / 2
+    this.radius = Math.min(WIDTH, HEIGHT) / 2.5
 
     this.pie = d3.pie()
       .value(d => d.jobs)
 
     this.arc = d3.arc()
-      .innerRadius(0)
+      .innerRadius(90)
       .outerRadius(this.radius)
 
     this.labelArc = d3.arc()
       .innerRadius(this.radius)
-      .outerRadius(this.radius + 70)
+      .outerRadius(this.radius + 100)
 
     this.percentageArc = d3.arc()
-      .innerRadius(this.radius / 2)
+      .innerRadius(this.radius / 2 - 30)
       .outerRadius(this.radius)
   }
 
