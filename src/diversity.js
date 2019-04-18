@@ -56,7 +56,7 @@ class Diversity extends Chart {
         .delay((d, i) => i * ANIMATION_DELAY)
         .duration(ANIMATION_DURATION)
         .ease(ANIMATION_EASING)
-        .attr('r', 10)
+        .attr('r', 3)
         .attr('cy', d => this.yScale(d.percentage))
   }
 
