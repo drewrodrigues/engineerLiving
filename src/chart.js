@@ -41,10 +41,17 @@ class Chart {
       .attr('transform', `translate(0, ${HEIGHT})`)
   }
 
-  yAxis(domain, yScale, ticks = 5) {
-    this.yScale = d3[yScale]()
-      .domain(domain)
-      .range([0, WIDTH])
+  yAxis(domain, yScale, ticks = 5, tickFormat = () => {}) {
+    if (yScale === 'scaleBand') {
+      this.yScale = d3[yScale]()
+        .domain(domain)
+        .range([0, WIDTH])
+        .padding(0.8)
+    } else {
+      this.yScale = d3[yScale]()
+        .domain(domain)
+        .range([0, WIDTH])
+    }
 
     this.chart
       .append('g')
