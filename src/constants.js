@@ -64,10 +64,17 @@ export const CITIES = {
     constant: SAN_FRANCISCO,
     class: SAN_FRANCISCO_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 41.4 },
-      { ethnicity: "Asian", percentage: 33.3 },
-      { ethnicity: "Hispanic", percentage: 15.3 },
-      { ethnicity: "Black", percentage: 5.5 }
+      { ethnicity: "White", percentage: .41 },
+      { ethnicity: "Asian", percentage: .33 },
+      { ethnicity: "Hispanic", percentage: .15 },
+      { ethnicity: "Black", percentage: .05 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 2130 },
+      { type: "1BR", price: 2639 },
+      { type: "2BR", price: 3286 },
+      { type: "3BR", price: 4291 },
+      { type: "4BR", price: 4567 }
     ],
     happinessRank: 10,
     medianHomePrice: 1331100,
@@ -84,10 +91,17 @@ export const CITIES = {
     constant: NEW_YORK,
     class: NEW_YORK_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 32.7 },
-      { ethnicity: "Asian", percentage: 13.2 },
-      { ethnicity: "Hispanic", percentage: 28.8 },
-      { ethnicity: "Black", percentage: 22.6 }
+      { ethnicity: "White", percentage: .32 },
+      { ethnicity: "Asian", percentage: .13 },
+      { ethnicity: "Hispanic", percentage: .28 },
+      { ethnicity: "Black", percentage: .22 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1743 },
+      { type: "1BR", price: 1788 },
+      { type: "2BR", price: 2049 },
+      { type: "3BR", price: 2600 },
+      { type: "4BR", price: 2771 }
     ],
     happinessRank: 90,
     medianHomePrice: 662100,
@@ -104,10 +118,17 @@ export const CITIES = {
     constant: BOSTON,
     class: BOSTON_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 46 },
-      { ethnicity: "Asian", percentage: 9.1 },
-      { ethnicity: "Hispanic", percentage: 18.4 },
-      { ethnicity: "Black", percentage: 22.7 }
+      { ethnicity: "White", percentage: .46 },
+      { ethnicity: "Asian", percentage: .09 },
+      { ethnicity: "Hispanic", percentage: .18 },
+      { ethnicity: "Black", percentage: .22 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1639 },
+      { type: "1BR", price: 1836 },
+      { type: "2BR", price: 2238 },
+      { type: "3BR", price: 2805 },
+      { type: "4BR", price: 3027 }
     ],
     happinessRank: 58,
     medianHomePrice: 587000,
@@ -124,10 +145,17 @@ export const CITIES = {
     constant: PORTLAND,
     class: PORTLAND_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 71.8 },
-      { ethnicity: "Asian", percentage: 7.4 },
-      { ethnicity: "Hispanic", percentage: 9.6 },
-      { ethnicity: "Black", percentage: 5.9 }
+      { ethnicity: "White", percentage: .71 },
+      { ethnicity: "Asian", percentage: .07 },
+      { ethnicity: "Hispanic", percentage: .09 },
+      { ethnicity: "Black", percentage: .05 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1123 },
+      { type: "1BR", price: 1225 },
+      { type: "2BR", price: 1432 },
+      { type: "3BR", price: 2073 },
+      { type: "4BR", price: 2516 }
     ],
     happinessRank: 84,
     medianHomePrice: 427500,
@@ -144,10 +172,17 @@ export const CITIES = {
     constant: SEATTLE,
     class: SEATTLE_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 66.2 },
-      { ethnicity: "Asian", percentage: 14.2 },
-      { ethnicity: "Hispanic", percentage: 6.4 },
-      { ethnicity: "Black", percentage: 7.2 }
+      { ethnicity: "White", percentage: .66 },
+      { ethnicity: "Asian", percentage: .14 },
+      { ethnicity: "Hispanic", percentage: .06 },
+      { ethnicity: "Black", percentage: .07 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1570 },
+      { type: "1BR", price: 1728 },
+      { type: "2BR", price: 2108 },
+      { type: "3BR", price: 3033 },
+      { type: "4BR", price: 3583 }
     ],
     happinessRank: 54,
     medianHomePrice: 761800,
@@ -164,10 +199,17 @@ export const CITIES = {
     constant: AUSTIN,
     class: AUSTIN_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 48.7 },
-      { ethnicity: "Asian", percentage: 6.5 },
-      { ethnicity: "Hispanic", percentage: 34.8 },
-      { ethnicity: "Black", percentage: 7.5 }
+      { ethnicity: "White", percentage: .48 },
+      { ethnicity: "Asian", percentage: .06 },
+      { ethnicity: "Hispanic", percentage: .34 },
+      { ethnicity: "Black", percentage: .07 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1017 },
+      { type: "1BR", price: 1186 },
+      { type: "2BR", price: 1437 },
+      { type: "3BR", price: 1897 },
+      { type: "4BR", price: 2294 }
     ],
     happinessRank: 14,
     medianHomePrice: 346500,
@@ -184,10 +226,17 @@ export const CITIES = {
     constant: SAN_JOSE,
     class: SAN_JOSE_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 27.5 },
-      { ethnicity: "Asian", percentage: 32.9 },
-      { ethnicity: "Hispanic", percentage: 33.1 },
-      { ethnicity: "Black", percentage: 2.9 }
+      { ethnicity: "White", percentage: .27 },
+      { ethnicity: "Asian", percentage: .32 },
+      { ethnicity: "Hispanic", percentage: .33 },
+      { ethnicity: "Black", percentage: .02 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1927 },
+      { type: "1BR", price: 2286 },
+      { type: "2BR", price: 2807 },
+      { type: "3BR", price: 3797 },
+      { type: "4BR", price: 4350 }
     ],
     happinessRank: 8,
     medianHomePrice: 1083000,
@@ -204,10 +253,17 @@ export const CITIES = {
     constant: RALEIGH,
     class: RALEIGH_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 54 },
-      { ethnicity: "Asian", percentage: 4.3 },
-      { ethnicity: "Hispanic", percentage: 10.9 },
-      { ethnicity: "Black", percentage: 28.5 }
+      { ethnicity: "White", percentage: .54 },
+      { ethnicity: "Asian", percentage: .04 },
+      { ethnicity: "Hispanic", percentage: .10 },
+      { ethnicity: "Black", percentage: .28 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 868 },
+      { type: "1BR", price: 975 },
+      { type: "2BR", price: 1115 },
+      { type: "3BR", price: 1435 },
+      { type: "4BR", price: 1811 }
     ],
     happinessRank: 23,
     medianHomePrice: 260100,
@@ -224,10 +280,17 @@ export const CITIES = {
     constant: DENVER,
     class: DENVER_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 52.9 },
-      { ethnicity: "Asian", percentage: 3.4 },
-      { ethnicity: "Hispanic", percentage: 31.2 },
-      { ethnicity: "Black", percentage: 9.5 }
+      { ethnicity: "White", percentage: .52 },
+      { ethnicity: "Asian", percentage: .03 },
+      { ethnicity: "Hispanic", percentage: .31 },
+      { ethnicity: "Black", percentage: .09 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 1083 },
+      { type: "1BR", price: 1265 },
+      { type: "2BR", price: 1585 },
+      { type: "3BR", price: 2231 },
+      { type: "4BR", price: 2588 }
     ],
     happinessRank: 41,
     medianHomePrice: 421900,
@@ -244,10 +307,17 @@ export const CITIES = {
     constant: PHOENIX,
     class: PHOENIX_CLASS,
     diversity: [
-      { ethnicity: "White", percentage: 46 },
-      { ethnicity: "Asian", percentage: 3.3 },
-      { ethnicity: "Hispanic", percentage: 40.5 },
-      { ethnicity: "Black", percentage: 6.5 }
+      { ethnicity: "White", percentage: .46 },
+      { ethnicity: "Asian", percentage: .03 },
+      { ethnicity: "Hispanic", percentage: .40 },
+      { ethnicity: "Black", percentage: .06 }
+    ],
+    rentalCosts: [
+      { type: "Studio", price: 793 },
+      { type: "1BR", price: 928 },
+      { type: "2BR", price: 1147 },
+      { type: "3BR", price: 1659 },
+      { type: "4BR", price: 1900 }
     ],
     happinessRank: 127,
     medianHomePrice: 229300,

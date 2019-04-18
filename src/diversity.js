@@ -13,10 +13,9 @@ class Diversity extends Chart {
     super(selector)
     this.ethnicities = ["White", "Asian", "Hispanic", "Black"]
     this.xAxis(this.ethnicities, 'scaleBand')
-    this.yAxis([100, 0], 'scaleLinear')
+    this.yAxis([1, 0], 'scaleLinear', 4, () => d3.format(".0%"))
     this.circles()
     this.percentageLabels()
-    this.labelLeft()
     this.labelTop('Diversity')
     this.gridLines(this.xScale, 'axisBottom')
     this.gridLines(this.yScale, 'axisRight')
@@ -73,21 +72,10 @@ class Diversity extends Chart {
       .enter()
       .append('text')
       .attr('text-anchor', 'middle')
-      .text(d => `${parseInt(d.percentage)}%`)
+      .text(d => d3.format(".0%")(d.percentage))
       .attr('x', d => this.xScale(d.ethnicity) + 25)
-      .attr('y', d => this.yScale(d.percentage) + 5)
+      .attr('y', d => this.yScale(d.percentage) - 10 )
       .style('fill', 'white')
-  }
-
-  labelLeft() {
-    this.chart
-      .append('text')
-      .attr('class', 'label-text')
-      .attr('x', -WIDTH/2)
-      .attr('y', -50)
-      .attr("transform", "rotate(-90)")
-      .attr('text-anchor', 'middle')
-      .text('% of population')
   }
 }
 
